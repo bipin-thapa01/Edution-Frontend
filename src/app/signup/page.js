@@ -8,7 +8,8 @@ export default function Page(){
     alt: "Login",
     ask: "New Here?",
     buttonText: "Create Your Account",
-    altOption: "or Login"
+    altOption: "or Login",
+    altLink: "/login"
   }
 
   return (

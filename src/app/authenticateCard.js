@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { RiMenu3Fill } from "react-icons/ri";
 import { FaLaptop } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
@@ -10,14 +11,14 @@ import { TiGroupOutline } from "react-icons/ti";
 import "./authenticateCard.css";
 
 export default function AuthenticateCard({ data }) {
-
+  const router = useRouter();
 
   return (
     <div>
       <div id="auth-nav">
         <div id="auth-nav-logo">EDUTION</div>
         <div id="auth-nav-func">
-          <div>
+          <div onClick={()=>{router.push(data.altLink)}}>
             {data.alt}
           </div>
           <RiMenu3Fill id="auth-nav-burger" fill="#7F24DD" />
@@ -86,7 +87,7 @@ export default function AuthenticateCard({ data }) {
               ) : null
             }
             <button id="auth-form-submit-button">{data.buttonText}</button>
-            <div id="auth-alt-option">{data.altOption}</div>
+            <div id="auth-alt-option" onClick={()=>{router.push(data.altLink)}}>{data.altOption}</div>
           </form>
         </div>
       </div>

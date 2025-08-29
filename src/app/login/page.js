@@ -8,7 +8,8 @@ export default function Page(){
     alt: "SinUp",
     ask: "Welcome back!",
     buttonText: "Login into your account",
-    altOption: "or Signup"
+    altOption: "or Signup",
+    altLink: "/signup",
   }
 
   return (

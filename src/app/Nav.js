@@ -72,15 +72,15 @@ export default function Nav({ feedData }) {
     </div>
     <div id="homepage-left-lower-container">
       <div className={`left-container-option ${selected === 'feed' ? 'selected' : ''}`} id="feed">
-        <BiSolidDashboard className="left-container-option-icon" />
+        <BiSolidDashboard fill="#5d1b9e" className="left-container-option-icon" />
         <div>Feed</div>
       </div>
       <div className={`left-container-option ${selected === 'people' ? 'selected' : ''}`}id="people">
-        <FaUser className="left-container-option-icon" />
+        <FaUser fill="#5d1b9e" className="left-container-option-icon" />
         <div>People</div>
       </div>
       <div className={`left-container-option ${selected === 'rooms' ? 'selected' : ''}`} id="rooms">
-        <FaUsers className="left-container-option-icon" />
+        <FaUsers fill="#5d1b9e" className="left-container-option-icon" />
         <div>Rooms</div>
       </div>
     </div>

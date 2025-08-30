@@ -1,9 +1,9 @@
-import './global.css';
+import HomePage from "./homePage";
+import "./global.css";
 
-export default function Page(){
-  return (
-    <div>
-      
-    </div>
-  );
+export default function Page() {
+
+  return <>
+    <HomePage/>
+  </>
 }

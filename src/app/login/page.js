@@ -1,20 +1,10 @@
-import AuthenticateCard from "../authenticateCard";
+import Login from "./login";
 import "../global.css";
 
-export default function Page(){
-
-  const signupData = {
-    type: "login",
-    alt: "SinUp",
-    ask: "Welcome back!",
-    buttonText: "Login into your account",
-    altOption: "or Signup",
-    altLink: "/signup",
-  }
-
+export default function Page() {
   return (
-    <div>
-      <AuthenticateCard data={signupData}/>
-    </div>
+    <>
+      <Login />
+    </>
   );
 }

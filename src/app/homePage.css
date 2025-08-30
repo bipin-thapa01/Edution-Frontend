@@ -1,0 +1,136 @@
+#homepage {
+  display: flex;
+  height: 100vh;
+}
+
+
+/* for left container */
+#homepage-left-container {
+  width: 20%;
+  height: 100vh;
+  overflow: auto;
+}
+
+#homepage-left-upper-container,
+#homepage-left-upper-container * {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+#homepage-left-upper-container {
+  height: 300px;
+}
+
+#homepage-left-upper-container-title {
+  text-align: center;
+  font-size: 22px;
+  font-family: cursive;
+  padding-top: 50px;
+  color: var(--theme-color);
+}
+
+#left-container-form, #left-container-info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 98%;
+  height: 280px;
+  margin-left: 1%;
+  margin-top: 40px;
+  padding: 50px 0px;
+  border-radius: 20px;
+  z-index: 1000;
+}
+
+#left-container-form,
+#left-container-form *, #left-container-info, #left-container-info * {
+  background-color: rgb(38, 38, 38);
+  color: var(--text-color);
+}
+
+.left-container-form-title {
+  text-align: center;
+}
+
+#left-nav-input-container-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 5px;
+}
+
+.left-nav-input-container {
+  width: 80%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  border: 1px solid gray;
+  padding: 4px 3px;
+  border-radius: 10px;
+}
+
+.left-input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+#left-container-info{
+  display: flex;
+  padding: 30px 0px;
+  flex-direction: column;
+  align-items: center;
+}
+
+#left-container-info-image{
+  border-radius: 50%;
+}
+
+#left-container-info-email{
+  font-size: 12px;
+}
+
+#left-nav-button {
+  width: 80%;
+  border: none;
+  background-color: var(--theme-color);
+  padding: 10px 0px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#homepage-left-lower-container {
+  margin-top: 160px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.left-container-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 40px;
+  cursor: pointer;
+  padding: 10px 0px;
+  margin-left: 10px;
+  width: 90%;
+}
+
+.selected,
+.selected * {
+  background-color: rgb(45, 45, 45);
+  border-radius: 10px;
+}
+
+.left-container-option-icon {
+  font-size: 24px;
+}
+
+/* for right container */
+#homepage-right-container{
+  width: 80%;
+  background-color: rgb(30, 30, 30);
+}

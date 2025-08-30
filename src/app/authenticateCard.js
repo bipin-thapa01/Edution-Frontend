@@ -8,9 +8,10 @@ import { FiMessageSquare } from "react-icons/fi";
 import { LuUserRound } from "react-icons/lu";
 import { MdOutlineMail } from "react-icons/md";
 import { TiGroupOutline } from "react-icons/ti";
+import { FaKey } from "react-icons/fa";
 import "./authenticateCard.css";
 
-export default function AuthenticateCard({ data }) {
+export default function AuthenticateCard({ data, submitForm }) {
   const router = useRouter();
 
   return (
@@ -18,7 +19,7 @@ export default function AuthenticateCard({ data }) {
       <div id="auth-nav">
         <div id="auth-nav-logo">EDUTION</div>
         <div id="auth-nav-func">
-          <div onClick={()=>{router.push(data.altLink)}}>
+          <div onClick={() => { router.push(data.altLink) }}>
             {data.alt}
           </div>
           <RiMenu3Fill id="auth-nav-burger" fill="#7F24DD" />
@@ -27,7 +28,7 @@ export default function AuthenticateCard({ data }) {
 
       <div id="auth-card">
         <div id="auth-purple-card" className="auth-card-child">
-          <div id="auth-purple-card-title">Join EDUCTION</div>
+          <div id="auth-purple-card-title">Join EDUTION</div>
           <div id="auth-purple-card-desc">Learn, Connect, and Grow - All in One Place</div>
           <div id="auth-purple-card-info">
             <div className="auth-purple-card-info-inner">
@@ -54,40 +55,41 @@ export default function AuthenticateCard({ data }) {
           </div>
         </div>
         <div id="auth-white-card" className="auth-card-child">
-          <div id="auth-white-card-logo">EDUCTION</div>
+          <div id="auth-white-card-logo">EDUTION</div>
           <div className="center">{data.ask}</div>
           <div id="jlmp" className="center">Join Like Minded Pairs</div>
-          <form id="auth-form">
+          <form id="auth-form" onSubmit={submitForm}>
             {
               data.type === 'signup' ? (
                 <>
                   <div className="auth-input-container">
-                    <LuUserRound className="auth-input-container-logo"/>
-                    <input autoComplete="off" type="text" placeholder="Enter your name" className="input" />
+                    <LuUserRound className="auth-input-container-logo" />
+                    <input autoComplete="off" type="text" placeholder="Enter your name" className="input" id="name" />
                   </div>
                 </>
               ) : null
             }
             <div className="auth-input-container">
-              <MdOutlineMail className="auth-input-container-logo"/>
-              <input autoComplete="off" type="text" placeholder="Enter your email" className="input" />
+              <MdOutlineMail className="auth-input-container-logo" />
+              <input autoComplete="off" type="text" placeholder="Enter your email" className="input" id=
+                'email' />
             </div>
             <div className="auth-input-container">
-              <LuUserRound className="auth-input-container-logo"/>
-              <input autoComplete="off" type="password" placeholder="Enter your password" className="input" />
+              <FaKey className="auth-input-container-logo" />
+              <input autoComplete="off" type="password" placeholder="Enter your password" className="input" id="password" />
             </div>
             {
               data.type === 'signup' ? (
                 <>
                   <div className="auth-input-container">
-                    <TiGroupOutline className="auth-input-container-logo"/>
-                    <input autoComplete="off" type="password" placeholder="Enter college room code" className="input" />
+                    <TiGroupOutline className="auth-input-container-logo" />
+                    <input autoComplete="off" type="password" placeholder="Enter college room code" className="input" id="room-code" />
                   </div>
                 </>
               ) : null
             }
             <button id="auth-form-submit-button">{data.buttonText}</button>
-            <div id="auth-alt-option" onClick={()=>{router.push(data.altLink)}}>{data.altOption}</div>
+            <div id="auth-alt-option" onClick={() => { router.push(data.altLink) }}>{data.altOption}</div>
           </form>
         </div>
       </div>

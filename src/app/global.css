@@ -8,6 +8,7 @@
   font-weight: 600;
   --text-color: rgb(178, 178, 178);
   --background-color: #181818;
+  --second-background-color: rgb(30, 30, 30);
   --theme-color: #5d1b9e;
   background-color: var(--background-color);
   color: var(--text-color);

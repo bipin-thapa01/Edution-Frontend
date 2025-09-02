@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { MdOutlineMail } from "react-icons/md";
@@ -8,6 +8,7 @@ import { FaUser } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 
 export default function Nav({ feedData }) {
+  const [fd, setFd] = useState(null);
   const router = useRouter();
   const [selected, setSelected] = useState('feed');
 
@@ -18,6 +19,10 @@ export default function Nav({ feedData }) {
     else if(position === 'people') setSelected('people');
     else if(position === 'rooms') setSelected('rooms');
   },[]);
+
+  useEffect(()=>{
+    setFd(feedData);
+  },[feedData])
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -40,20 +45,19 @@ export default function Nav({ feedData }) {
       localStorage.setItem('token', data.token);
       router.push('/');
     }
+    location.reload();
   }
 
-  return <div id="homepage-left-container">
-    <div id="homepage-left-upper-container">
-      <div id="homepage-left-upper-container-title">EDUTION</div>
-      {
-        feedData && feedData.response === 'valid' ? (
-          <div id="left-container-info">
+  let htmlData;
+  if(fd && fd.response === 'valid'){
+    htmlData = <div id="left-container-info">
             <Image src={feedData.user.imgurl} width={130} height={130} alt="profile picture" id="left-container-info-image" />
             <div>{feedData.user.name}</div>
             <div id="left-container-info-email">{feedData.user.email}</div>
           </div>
-        ) :
-          (<form id="left-container-form" onSubmit={submitForm}>
+  }
+  else{
+    htmlData = <form id="left-container-form" onSubmit={submitForm}>
             <div className="left-container-form-title">Login Now</div>
             <div id="left-nav-input-container-container">
               <div className="left-nav-input-container">
@@ -67,8 +71,13 @@ export default function Nav({ feedData }) {
               </div>
               <button id="left-nav-button">Login in</button>
             </div>
-          </form>)
-      }
+          </form>
+  }
+
+  return <div id="homepage-left-container">
+    <div id="homepage-left-upper-container">
+      <div id="homepage-left-upper-container-title">EDUTION</div>
+      {htmlData}
     </div>
     <div id="homepage-left-lower-container">
       <div className={`left-container-option ${selected === 'feed' ? 'selected' : ''}`} id="feed">

@@ -143,6 +143,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 30px;
+  position: relative;
 }
 
 #homepage-right-nav,#homepage-right-nav *{
@@ -176,7 +177,7 @@
 
 #right-nav-options{
   display: flex;
-  column-gap: 40px;
+  column-gap: 10px;
   justify-content: center;
 }
 
@@ -188,15 +189,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .right-nav-opt, .right-nav-opt *{
   background-color: rgb(52, 52, 52)!important;
 }
 
-.right-nav-opt *{
-  cursor: pointer;
+.right-nav-opt:hover, .right-nav-opt:hover *{
+  background-color: rgb(88, 88, 88)!important;
 }
+
 
 #right-nav-image{
   width: 40px;

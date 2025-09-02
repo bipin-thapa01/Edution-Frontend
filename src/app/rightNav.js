@@ -30,7 +30,6 @@ export default function RightNav({ feedData }) {
     <div id="right-nav-options">
       <div className="right-nav-opt" onClick={managePopup}><FaUserPlus /></div>
       <div className="right-nav-opt" onClick={managePopup}><FaRegBell /></div>
-      <div className="right-nav-opt" onClick={managePopup}><MdOutlineEmail /></div>
       <div className="right-nav-opt" onClick={managePopup}><TbMessage /></div>
       <Image src={imgurl} alt="logo" width={100} height={100} id="right-nav-image" onClick={managePopup}/>
     </div>

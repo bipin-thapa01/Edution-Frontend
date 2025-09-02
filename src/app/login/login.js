@@ -17,15 +17,23 @@ export default function Login(){
 
   const submitForm = async (e) =>{
     e.preventDefault();
-    const email = e.currentTarget.querySelector('#email').value;
+    const temp = e.currentTarget.querySelector('#email').value.trim();
+    let email;
+    let username;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(emailRegex.test(temp)){
+      email = temp;
+    }
+    else{
+      username = temp;
+    }
     const password = e.currentTarget.querySelector('#password').value;
-
     const res = await fetch('http://localhost:8080/api/login',{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({email: email, password: password})
+      body: JSON.stringify({email: email,username: username, password: password})
     });
     const data = await res.json();
     if(data.error){

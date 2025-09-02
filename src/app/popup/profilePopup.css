@@ -1,7 +1,8 @@
 #right-nav-popup{
+
 }
 
-#profile-popup, #friend-request-popup{
+#profile-popup, #friend-request-popup, #friend-request-popup-no, #notification-popup{
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -9,14 +10,15 @@
   padding: 10px 10px;
   top: 70px;
   right: 10px;
-  width: 300px;
+  width: 350px;
+  height: 500px;
   border-radius: 10px;
   border: 1px solid rgb(65, 65, 65);
   background-color: var(--background-color)!important;
   display: none;
 }
 
-#friend-request-popup{
+#notification-popup{
   display: flex;
 }
 
@@ -55,4 +57,63 @@
 
 #profile-popup-username{
   font-size: 18px;
+}
+
+.friend-request-card{
+  display: flex;
+  column-gap: 10px;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgb(65, 65, 65);
+}
+
+.friend-request-logo{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.friend-request-card-details-container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.friend-request-card-details{
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.friend-request-card-title{
+  font-size: 14px;
+}
+
+.friend-request-card-room-code{
+  font-size: 12px;
+}
+
+.friend-request-card-time{
+  font-size: 12px;
+  color: var(--theme-color);
+}
+
+.friend-request-card-buttons{
+  display: flex;
+  column-gap: 20px;
+}
+
+.friend-request-card-button{
+  border: none;
+  outline: none;
+  padding: 5px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.friend-request-card-button1{
+  background-color: var(--theme-color)!important;
+}
+
+.friend-request-card-button2{
+  background-color: rgb(57, 57, 57)!important;
 }

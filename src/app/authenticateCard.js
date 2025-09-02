@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { RiMenu3Fill } from "react-icons/ri";
+import { FaUser } from "react-icons/fa";
 import { FaLaptop } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
 import { FiMessageSquare } from "react-icons/fi";
@@ -65,6 +66,10 @@ export default function AuthenticateCard({ data, submitForm }) {
                   <div className="auth-input-container">
                     <LuUserRound className="auth-input-container-logo" />
                     <input autoComplete="off" type="text" placeholder="Enter your name" className="input" id="name" />
+                  </div>
+                  <div className="auth-input-container">
+                    <FaUser className="auth-input-container-logo" />
+                    <input autoComplete="off" type="text" placeholder="Enter your username" className="input" id="username" />
                   </div>
                 </>
               ) : null

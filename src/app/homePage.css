@@ -65,9 +65,9 @@
   height: 40px;
   display: flex;
   align-items: center;
-  column-gap: 5px;
+  column-gap: 8px;
   border: 1px solid gray;
-  padding: 4px 3px;
+  padding: 4px 6px;
   border-radius: 10px;
 }
 
@@ -89,7 +89,7 @@
 }
 
 #left-container-info-email{
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #left-nav-button {

@@ -17,6 +17,7 @@ export default function Signup(){
   const submitForm = async (e) =>{
     e.preventDefault();
     const name = e.currentTarget.querySelector('#name').value;
+    const username = e.currentTarget.querySelector('#username').value;
     const email = e.currentTarget.querySelector('#email').value;
     const password = e.currentTarget.querySelector('#password').value;
     const roomCode = e.currentTarget.querySelector('#room-code').value;
@@ -26,7 +27,7 @@ export default function Signup(){
       headers:{
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({name: name, email: email, password: password, code: roomCode})
+      body: JSON.stringify({name: name,username: username, email: email, password: password, code: roomCode})
     });
     const data = await res.json();
     console.log(data);

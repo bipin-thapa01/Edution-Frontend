@@ -26,7 +26,16 @@ export default function Nav({ feedData }) {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const email = e.currentTarget.querySelector('#email').value;
+    const temp = e.currentTarget.querySelector('#email').value.trim();
+    let email;
+    let username;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(emailRegex.test(temp)){
+      email = temp;
+    }
+    else{
+      username = temp;
+    }
     const password = e.currentTarget.querySelector('#password').value;
 
     const res = await fetch('http://localhost:8080/api/login', {
@@ -34,7 +43,7 @@ export default function Nav({ feedData }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ email: email, username: username, password: password })
     });
     const data = await res.json();
     if (data.error) {
@@ -53,7 +62,7 @@ export default function Nav({ feedData }) {
     htmlData = <div id="left-container-info">
             <Image src={feedData.user.imgurl} width={130} height={130} alt="profile picture" id="left-container-info-image" />
             <div>{feedData.user.name}</div>
-            <div id="left-container-info-email">{feedData.user.email}</div>
+            <div id="left-container-info-email">@{feedData.user.username}</div>
           </div>
   }
   else{

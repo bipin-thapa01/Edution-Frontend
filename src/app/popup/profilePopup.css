@@ -55,14 +55,14 @@
   font-size: 18px;
 }
 
-.friend-request-card{
+.friend-request-card, .notification-card{
   display: flex;
   column-gap: 10px;
   padding: 10px 0px;
   border-bottom: 1px solid rgb(65, 65, 65);
 }
 
-.friend-request-logo{
+.friend-request-logo, .notification-user-logo{
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -112,4 +112,28 @@
 
 .friend-request-card-button2{
   background-color: rgb(57, 57, 57)!important;
+}
+
+.notification-container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.notification-description{
+  font-size: 14px;
+}
+
+.notification-by{
+  font-size: 12px;
+}
+
+.verified{
+  font-size: 12px;
+}
+
+#source-container{
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
 }

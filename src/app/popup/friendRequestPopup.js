@@ -29,7 +29,6 @@ export default function FriendRequestPopup({ feedData, friendRequestPopup }) {
       const requestTime = new Date(iso);
       const now = new Date();
       const diff = now - requestTime;
-      console.log(diff)
       if(diff/(1000*60*60*24*30*12) >= 1){
         return `${Math.floor(diff/(1000*60*60*24*30*12))} years`;
       }

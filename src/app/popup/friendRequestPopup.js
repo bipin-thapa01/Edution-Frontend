@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-export default function FriendRequestPopup({ feedData }) {
+export default function FriendRequestPopup({ feedData, friendRequestPopup }) {
   const [friendRequests, setFriendRequests] = useState(null);
-
   const fetchFriendDetails = async () => {
     if (feedData && feedData.user) {
       const res = await fetch('http://localhost:8080/api/friends',
@@ -24,12 +23,6 @@ export default function FriendRequestPopup({ feedData }) {
   useEffect(() => {
     fetchFriendDetails();
   }, []);
-
-  if (friendRequests === null || friendRequests.users === null) {
-    return <div id="friend-request-popup-no">
-      No friend requests available to show!
-    </div>
-  }
 
   const findDuration = (date)=>{
     const iso = date.replace(" ","T")
@@ -57,9 +50,9 @@ export default function FriendRequestPopup({ feedData }) {
       }
   }
 
-  return <div id="friend-request-popup">
+  return <div id="friend-request-popup" ref={friendRequestPopup}>
     {
-      friendRequests.users.map((item, index) => {
+      friendRequests ? (friendRequests.response == 'available' ? (friendRequests.users.map((item, index) => {
         return <div key={index} className="friend-request-card temp-color">
           <Image src={item.imgurl} alt="logo"
             width={100} height={100} className="friend-request-logo" />
@@ -75,7 +68,7 @@ export default function FriendRequestPopup({ feedData }) {
             </div>
           </div>
         </div>
-      })
+      })) : (<div>No Friend Requests</div>)) : (<div>Login</div>)
     }
   </div>
 }

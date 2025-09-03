@@ -1,8 +1,8 @@
 #right-nav-popup{
-
+  display: none;
 }
 
-#profile-popup, #friend-request-popup, #friend-request-popup-no, #notification-popup{
+#profile-popup, #friend-request-popup, #friend-request-popup-no, #notification-popup, #message-popup, #notification-popup{
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -16,10 +16,6 @@
   border: 1px solid rgb(65, 65, 65);
   background-color: var(--background-color)!important;
   display: none;
-}
-
-#notification-popup{
-  display: flex;
 }
 
 .temp-color{

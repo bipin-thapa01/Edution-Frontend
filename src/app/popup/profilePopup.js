@@ -4,8 +4,8 @@ import { FaCircleQuestion } from "react-icons/fa6";
 import { MdQuestionAnswer } from "react-icons/md";
 import { MdOutlineLogout } from "react-icons/md";
 
-export default function ProfilePopup({ feedData }) {
-  return <div id="profile-popup">
+export default function ProfilePopup({ feedData, profilePopup }) {
+  return <div id="profile-popup" ref={profilePopup}>
     {
       feedData && feedData.user ? (
         <>

@@ -4,12 +4,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Quicksand", Verdana, sans-serif;
-  font-weight: 600;
+  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
   --text-color: rgb(178, 178, 178);
-  --background-color: #181818;
+  --background-color: #131314;
   --second-background-color: rgb(30, 30, 30);
-  --theme-color: #5d1b9e;
+  --theme-color: #6614b8;
   background-color: var(--background-color);
   color: var(--text-color);
 }

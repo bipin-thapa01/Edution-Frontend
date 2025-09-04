@@ -1,13 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Nav from "./Nav";
-import NewsFeed from "./newsFeed";
+import { useEffect, useState } from "react";
 import "./homePage.css";
+import Nav from "./nav/nav";
 
 export default function HomePage() {
   const router = useRouter();
-  const [feedData, setFeedData] = useState(null);
+  const [loginCredentials, setLoginCredentials] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +27,7 @@ export default function HomePage() {
 
         const data = await res.json();
         console.log('Feed data:', data);
-        setFeedData(data);
+        setLoginCredentials(data);
       } catch (err) {
         console.error('Error fetching feed:', err);
       } finally {
@@ -45,8 +44,13 @@ export default function HomePage() {
 
   return (
     <div id="homepage">
-      <Nav feedData={feedData} />
-      <NewsFeed feedData={feedData}/>
+      {
+        loginCredentials && loginCredentials.response === 'valid' ? (<>
+          <Nav loginCredentials={loginCredentials.user}/>
+        </>) : (<>
+          {router.push('/login')}
+          </>)
+      }
     </div>
   );
 }

@@ -10,6 +10,21 @@
   --background-color: #131314;
   --second-background-color: rgb(30, 30, 30);
   --theme-color: #6614b8;
+  --selected-color: rgb(46,46,46);
+  --border-color: rgb(46, 46, 46);
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+#homepage, #notification-page{
+  max-height: 100vh;
+  width: 1200px;
+  margin-left: calc(50vw - 600px);
+  display: flex;
+}
+
+.middle-container{
+  border-left: 0.5px solid var(--border-color);
+  border-right: 0.5px solid var(--border-color);
+  flex: 0 0 648px;
 }

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { MdHome } from "react-icons/md";
 import { FaRegBell, FaUserPlus } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
@@ -10,7 +12,33 @@ import { FaGear } from "react-icons/fa6";
 import './nav.css';
 
 export default function Nav({ loginCredentials }) {
-  console.log(loginCredentials)
+  const router = useRouter();
+  useEffect(() => {
+    const url = window.location.href.split('/');
+    const lastUrl = url[url.length - 1]
+    const home = document.getElementById('home');
+    const search = document.getElementById('search');
+    const notification = document.getElementById('notification');
+    const remember = document.getElementById('remember');
+    const zone = document.getElementById('zone');
+    const message = document.getElementById('message');
+    const profile = document.getElementById('profile');
+    const settings = document.getElementById('settings');
+    const allOptions = document.querySelectorAll('.nav-option')
+    if (lastUrl === '') {
+      allOptions.forEach(option => {
+        option.classList.remove('option-selected');
+      })
+      home.classList.add('option-selected');
+    }
+    else if (lastUrl === 'notification') {
+      allOptions.forEach(option => {
+        option.classList.remove('option-selected');
+      })
+      notification.classList.add('option-selected');
+    }
+  }, [])
+
   return <div id="nav">
     <div id="nav-logo">
       ED
@@ -23,36 +51,40 @@ export default function Nav({ loginCredentials }) {
       </div>
     </div>
     <div id="nav-options">
-      <div className="nav-option">
-        <MdHome className="nav-option-logo"/>
+      <div id="home" className="nav-option" onClick={() => router.push('/')}>
+        <MdHome className="nav-option-logo" />
         <div>Homepage</div>
       </div>
-      <div className="nav-option">
-        <IoMdSearch className="nav-option-logo"/>
+      <div id="search" className="nav-option">
+        <IoMdSearch className="nav-option-logo" />
         <div>Search</div>
       </div>
-      <div className="nav-option">
-        <FaRegBell className="nav-option-logo"/>
+      <div id="notification" className="nav-option" onClick={() => router.push('/notification')}>
+        <FaRegBell className="nav-option-logo" />
         <div>Notifications</div>
       </div>
-      <div className="nav-option">
-        <FaBookmark className="nav-option-logo"/>
+      <div id="remember" className="nav-option">
+        <FaBookmark className="nav-option-logo" />
         <div>Remember</div>
       </div>
-      <div className="nav-option">
-        <MdGroups2 className="nav-option-logo"/>
+      <div id="friend" className="nav-option">
+        <FaUserPlus className="nav-option-logo" />
+        <div>Friends</div>
+      </div>
+      <div id="zone" className="nav-option">
+        <MdGroups2 className="nav-option-logo" />
         <div>Zone</div>
       </div>
-      <div className="nav-option">
-        <TbMessage className="nav-option-logo"/>
+      <div id="message" className="nav-option">
+        <TbMessage className="nav-option-logo" />
         <div>Message</div>
       </div>
-      <div className="nav-option">
-        <IoPerson className="nav-option-logo"/>
+      <div id="profile" className="nav-option">
+        <IoPerson className="nav-option-logo" />
         <div>Profile</div>
       </div>
-      <div className="nav-option">
-        <FaGear className="nav-option-logo"/>
+      <div id="settings" className="nav-option">
+        <FaGear className="nav-option-logo" />
         <div>Settings</div>
       </div>
       <button id="nav-post">Post</button>

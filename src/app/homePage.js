@@ -3,6 +3,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import "./homePage.css";
 import Nav from "./nav/nav";
+import Home from "./home";
+import RightContainer from "./right/rightContainer";
 
 export default function HomePage() {
   const router = useRouter();
@@ -47,6 +49,8 @@ export default function HomePage() {
       {
         loginCredentials && loginCredentials.response === 'valid' ? (<>
           <Nav loginCredentials={loginCredentials.user}/>
+          <Home loginCredentials={loginCredentials.user}/>
+          <RightContainer loginCredentials={loginCredentials.user}/>
         </>) : (<>
           {router.push('/login')}
           </>)

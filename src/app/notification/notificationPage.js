@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Ring } from 'ldrs/react'
+import 'ldrs/react/Ring.css'
 import Nav from "../nav/nav";
 import Notification from "./notification";
 import RightContainer from "../right/rightContainer";
@@ -20,6 +22,7 @@ export default function NotificationPage() {
           },
         });
         const data = await res.json();
+        console.log(data)
         setFetchData(data);
       } catch (error) {
         console.error("Error fetching notifications:", error);
@@ -34,15 +37,11 @@ export default function NotificationPage() {
     }
   }, [fetchData, router]);
 
-  if (!fetchData || fetchData.response === "invalid") {
-    return <div>EDUTION</div>;
-  }
-
   return (
     <div id="notification-page">
-      <Nav loginCredentials={fetchData.userDTO} />
-      <Notification notifications={fetchData.notifications}/>
-      <RightContainer loginCredentials={fetchData.userDTO} />
+      <Nav loginCredentials={fetchData} />
+      <Notification notifications={fetchData}/>
+      <RightContainer loginCredentials={fetchData} />
     </div>
   );
 }

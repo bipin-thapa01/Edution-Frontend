@@ -8,53 +8,38 @@ import RightContainer from "./right/rightContainer";
 
 export default function HomePage() {
   const router = useRouter();
-  const [loginCredentials, setLoginCredentials] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [fetchData, setFetchData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-
+    const fetchHomepage = async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/home', {
-          method: 'GET',
+        const res = await fetch("http://localhost:8080/api/user-notification", {
+          method: "GET",
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
+            authorization: `${localStorage.getItem("token")}`,
+          },
         });
-
         const data = await res.json();
-        console.log('Feed data:', data);
-        setLoginCredentials(data);
-      } catch (err) {
-        console.error('Error fetching feed:', err);
-      } finally {
-        setLoading(false);
+        console.log(data)
+        setFetchData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     };
-
-    fetchData();
+    fetchHomepage();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    if (fetchData?.response === "invalid") {
+      router.push("/login");
+    }
+  }, [fetchData, router]);
 
   return (
     <div id="homepage">
-      {
-        loginCredentials && loginCredentials.response === 'valid' ? (<>
-          <Nav loginCredentials={loginCredentials.user}/>
-          <Home loginCredentials={loginCredentials.user}/>
-          <RightContainer loginCredentials={loginCredentials.user}/>
-        </>) : (<>
-          {router.push('/login')}
-          </>)
-      }
+      <Nav loginCredentials={fetchData} />
+      <Home loginCredentials={fetchData} />
+      <RightContainer loginCredentials={fetchData} />
     </div>
   );
 }

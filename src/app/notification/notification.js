@@ -1,12 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { Ring } from 'ldrs/react'
+import 'ldrs/react/Ring.css'
 import { FaStar } from "react-icons/fa6";
 import './notification.css';
 
 export default function Notification({ notifications }) {
+  const [displayNotifications, setDisplayNotifications] = useState(null);
   const all = useRef(null);
   const posts = useRef(null);
   const friend = useRef(null);
+
+  useEffect(()=>{
+    if(notifications){
+      setDisplayNotifications(notifications.notifications);
+    }
+  },[notifications])
 
   const convertTime = (date) => {
     const prev = new Date(date);
@@ -68,19 +77,25 @@ export default function Notification({ notifications }) {
     </div>
     <div>
       {
-        notifications.length === 0 ? <div id='no-notification'>No notification yet</div> :
-          notifications.map((item, index) => {
-            return <div className='notification-card' key={index}>
-              <Image className='notification-logo' src={item.imgurl} width={100} height={100} alt='logo' />
-              <div className='notification-card-details-container'>
-                <div>{item.description}</div>
-                <div className='notification-by'>
-                  <div>By: {item.source}</div>
-                  <div className='notification-star'>{item.source === 'admin' ? <FaStar fill='#6614b8' /> : null}</div></div>
-              </div>
-              <div className='notification-time'>{convertTime(item.date)}</div>
+        !displayNotifications ? <div id='notification-loading-container'> <Ring color="#6614b8" size={30} speed={1} bgOpacity={0.2} /> </div> : displayNotifications.length === 0 ? <div id='no-notification'>No notification yet</div> :
+        displayNotifications.map((item, index) => {
+          return <div className='notification-card' key={index}>
+            <Image className='notification-logo' src={item.imgurl} width={100} height={100} alt='logo' />
+            <div className='notification-card-details-container'>
+              <div>{item.description}</div>
+              <div className='notification-by'>
+                <div>By: {item.source}</div>
+                <div className='notification-star'>{item.source === 'admin' ? <FaStar fill='#6614b8' /> : null}</div></div>
+              {
+                item.type === 'friend request' && item.status === 'pending' ? <div className='notification-request-buttons'>
+                <button className='notification-button-accept'>Accept</button>
+                <button className='notification-button-decline'>Decline</button>
+              </div> : null
+              }
             </div>
-          })
+            <div className='notification-time'>{convertTime(item.date)}</div>
+          </div>
+        })
       }
     </div>
   </div>

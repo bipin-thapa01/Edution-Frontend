@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Ring } from 'ldrs/react'
+import 'ldrs/react/Ring.css'
 import { MdHome } from "react-icons/md";
 import { FaRegBell, FaUserPlus } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
@@ -43,13 +45,17 @@ export default function Nav({ loginCredentials }) {
     <div id="nav-logo">
       ED
     </div>
-    <div id="nav-user-info">
-      <Image id="nav-user-image" src={loginCredentials.imgurl} width={100} height={100} alt="user-logo" />
-      <div id="nav-user-desc">
-        <div id="nav-user-name">{loginCredentials.name}</div>
-        <div id="nav-user-username">@{loginCredentials.username}</div>
+    {
+      loginCredentials && loginCredentials.userDTO ? <div id="nav-user-info">
+        <Image id="nav-user-image" src={loginCredentials.userDTO.imgurl} width={100} height={100} alt="user-logo" />
+        <div id="nav-user-desc">
+          <div id="nav-user-name">{loginCredentials.userDTO.name}</div>
+          <div id="nav-user-username">@{loginCredentials.userDTO.username}</div>
+        </div>
+      </div> : <div id="nav-user-loading">
+        <Ring color="#6614b8" size={30} speed={1} bgOpacity={0.2} />
       </div>
-    </div>
+    }
     <div id="nav-options">
       <div id="home" className="nav-option" onClick={() => router.push('/')}>
         <MdHome className="nav-option-logo" />

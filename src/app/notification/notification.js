@@ -48,6 +48,7 @@ export default function Notification({ notifications }) {
     all.current.style.setProperty('--after-all', 'block');
     posts.current.style.setProperty('--after-post', 'none');
     friend.current.style.setProperty('--after-friend', 'none');
+    setDisplayNotifications(notifications.notifications);
   }
 
   const filterPosts = (e) => {
@@ -57,6 +58,9 @@ export default function Notification({ notifications }) {
     all.current.style.setProperty('--after-all', 'none');
     posts.current.style.setProperty('--after-post', 'block');
     friend.current.style.setProperty('--after-friend', 'none');
+    setDisplayNotifications(notifications.notifications.filter((item,index)=>{
+      return item.type === 'post';
+    }))
   }
 
   const filterFriend = (e) => {
@@ -66,6 +70,53 @@ export default function Notification({ notifications }) {
     all.current.style.setProperty('--after-all', 'none');
     posts.current.style.setProperty('--after-post', 'none');
     friend.current.style.setProperty('--after-friend', 'block');
+    setDisplayNotifications(notifications.notifications.filter((item,index)=>{
+      return item.type === 'friend request';
+    }))
+  }
+
+  const acceptRequest = async (e,index) =>{
+    e.currentTarget.innerHTML = 'Accepting..';
+    const res = await fetch('http://localhost:8080/api/friend-request',{
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({response: 'accepted',
+      username: notifications.userDTO.username,
+      source: notifications.notifications[index].source})
+    });
+    const data = await res.json();
+    console.log(data)
+    if(data.response == 'success'){
+      document.getElementById(`buttons-${index}`).style.display = 'none';
+      console.log(document.getElementById(`request-accepted-${index}`))
+      document.getElementById(`request-accepted-${index}`).style.display = 'block';
+    }
+    else{
+
+    }
+  }
+
+  const declineRequest = async (e,index) =>{
+    e.currentTarget.innerHTML = 'Declining..';
+    const res = await fetch('http://localhost:8080/api/friend-request',{
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({response: 'declined',
+      username: notifications.userDTO.username,
+      source: notifications.notifications[index].source})
+    });
+    const data = await res.json();
+    if(data.response == 'success'){
+      document.getElementById(`buttons-${index}`).style.display = 'none';
+      document.getElementById(`request-declined-${index}`).style.display = 'block';
+    }
+    else{
+
+    }
   }
 
   return <div id="notification-container" className="middle-container">
@@ -77,7 +128,7 @@ export default function Notification({ notifications }) {
     </div>
     <div>
       {
-        !displayNotifications ? <div id='notification-loading-container'> <Ring color="#6614b8" size={30} speed={1} bgOpacity={0.2} /> </div> : displayNotifications.length === 0 ? <div id='no-notification'>No notification yet</div> :
+        !displayNotifications ? <div id='notification-loading-container'> <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} /> </div> : displayNotifications.length === 0 ? <div id='no-notification'>No notification yet</div> :
         displayNotifications.map((item, index) => {
           return <div className='notification-card' key={index}>
             <Image className='notification-logo' src={item.imgurl} width={100} height={100} alt='logo' />
@@ -87,11 +138,13 @@ export default function Notification({ notifications }) {
                 <div>By: {item.source}</div>
                 <div className='notification-star'>{item.source === 'admin' ? <FaStar fill='#6614b8' /> : null}</div></div>
               {
-                item.type === 'friend request' && item.status === 'pending' ? <div className='notification-request-buttons'>
-                <button className='notification-button-accept'>Accept</button>
-                <button className='notification-button-decline'>Decline</button>
+                item.type === 'friend request' && item.status === 'pending' ? <div id={`buttons-${index}`} className='notification-request-buttons'>
+                <button onClick={(e)=>acceptRequest(e,index)} className='notification-button-accept'>Accept</button>
+                <button onClick={(e)=>declineRequest(e,index)} className='notification-button-decline'>Decline</button>
               </div> : null
               }
+              <div className='notification-friend-request-status' id={`request-accepted-${index}`}>Accepted</div>
+              <div className='notification-friend-request-status' id={`request-declined-${index}`}>Declined</div>
             </div>
             <div className='notification-time'>{convertTime(item.date)}</div>
           </div>

@@ -142,6 +142,7 @@
 .notification-button-accept, .notification-button-decline{
   padding: 5px 10px;
   border-radius: 10px;
+  width: 80px;
   border: none;
   outline: none;
   cursor: pointer;
@@ -162,4 +163,13 @@
 
 .notification-button-decline:hover{
   background-color: rgb(52, 52, 52);
+}
+
+.notification-friend-request-status{
+  color: rgb(81, 81, 81);
+  display: none;
+}
+
+#accept-loading-ring{
+  background-color: purple!important;
 }

@@ -53,7 +53,7 @@ export default function Nav({ loginCredentials }) {
           <div id="nav-user-username">@{loginCredentials.userDTO.username}</div>
         </div>
       </div> : <div id="nav-user-loading">
-        <Ring color="#6614b8" size={30} speed={1} bgOpacity={0.2} />
+        <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
       </div>
     }
     <div id="nav-options">

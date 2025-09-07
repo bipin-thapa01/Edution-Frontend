@@ -23,6 +23,10 @@
   display: flex;
 }
 
+#homepage{
+  position: relative;
+}
+
 .middle-container{
   border-left: 0.5px solid var(--border-color);
   border-right: 0.5px solid var(--border-color);

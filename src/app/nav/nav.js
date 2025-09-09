@@ -5,6 +5,7 @@ import { Ring } from 'ldrs/react'
 import 'ldrs/react/Ring.css'
 import { MdHome } from "react-icons/md";
 import { FaRegBell, FaUserPlus } from "react-icons/fa";
+import { FaStar } from "react-icons/fa6";
 import { IoMdSearch } from "react-icons/io";
 import { FaBookmark } from "react-icons/fa";
 import { MdGroups2 } from "react-icons/md";
@@ -15,6 +16,8 @@ import './nav.css';
 
 export default function Nav({ loginCredentials }) {
   const router = useRouter();
+  const [loginData, setLoginData] = useState(null);
+  const [starColor, setStarColor] = useState('white');
   useEffect(() => {
     const url = window.location.href.split('/');
     const lastUrl = url[url.length - 1]
@@ -39,18 +42,43 @@ export default function Nav({ loginCredentials }) {
       })
       notification.classList.add('option-selected');
     }
-  }, [])
+  }, []);
+
+  useEffect(()=>{
+    if(loginCredentials){
+      if(loginCredentials.userDTO){
+        setLoginData(loginCredentials.userDTO);
+      }
+      else{
+        setLoginData(loginCredentials.user);
+      }
+      if((loginCredentials.user && loginCredentials.user.type === 'PRO') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'PRO')){
+        setStarColor('blue');
+      }
+      else if((loginCredentials.user && loginCredentials.user.type === 'LEGEND') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'LEGEND')){
+        setStarColor('#6614b8');
+      }
+      else{
+        setStarColor('gold')
+      }
+    }
+  },[loginCredentials]);
 
   return <div id="nav">
     <div id="nav-logo">
       ED
     </div>
     {
-      loginCredentials && loginCredentials.userDTO ? <div id="nav-user-info">
-        <Image id="nav-user-image" src={loginCredentials.userDTO.imgurl} width={100} height={100} alt="user-logo" />
+      loginData ? <div id="nav-user-info">
+        <Image id="nav-user-image" src={loginData.imgurl} width={100} height={100} alt="user-logo" />
         <div id="nav-user-desc">
-          <div id="nav-user-name">{loginCredentials.userDTO.name}</div>
-          <div id="nav-user-username">@{loginCredentials.userDTO.username}</div>
+          <div id="nav-username-container">
+            <div id="nav-user-name">{loginData.name}</div>
+            {
+              loginData.type !== 'BASIC' ? <FaStar fill={`${starColor}`}/> : null
+            }
+          </div>
+          <div id="nav-user-username">@{loginData.username}</div>
         </div>
       </div> : <div id="nav-user-loading">
         <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />

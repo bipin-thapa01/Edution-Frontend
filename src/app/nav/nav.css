@@ -42,6 +42,12 @@
   row-gap: 2px;
 }
 
+#nav-username-container{
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+}
+
 #nav-user-name{
   font-weight: 600;
   font-size: 18px;

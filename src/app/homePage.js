@@ -13,7 +13,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchHomepage = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/user-notification", {
+        const res = await fetch("http://localhost:8080/api/home", {
           method: "GET",
           headers: {
             authorization: `${localStorage.getItem("token")}`,

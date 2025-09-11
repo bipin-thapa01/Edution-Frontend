@@ -76,7 +76,7 @@ export default function Home({ loginCredentials }) {
     e.target.value = null;
   };
 
-  return <div id="home" className="middle-container">
+  return <div id="home-container" className="middle-container">
     <div id="homepage-filter">
       <div id="home-filter-discovery">Discover</div>
       <div id="home-filter-following">Following</div>

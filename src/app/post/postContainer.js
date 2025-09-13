@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { CiStar } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
+import { BiRepost } from "react-icons/bi";
+import { FaStar } from "react-icons/fa6";
 import Image from "next/image";
 import "./postContainer.css"
 
 export default function PostContainer({ loginData }) {
   const [discover, setDiscover] = useState(null);
+  let starColor = 'white';
 
   useEffect(() => {
     const getDiscoverPost = async () => {
@@ -23,6 +26,15 @@ export default function PostContainer({ loginData }) {
     }
     getDiscoverPost();
   }, [loginData]);
+
+  const redefineStarColor = (item) =>{
+    if(item.type === 'LEGEND'){
+      starColor = '#6614b8';
+    }
+    else{
+      starColor = 'gold';
+    }
+  }
 
   const convertTime = (date) => {
     const prev = new Date(date);
@@ -51,19 +63,23 @@ export default function PostContainer({ loginData }) {
   return <div id="post-results">
     {
       discover ? discover.map((item, index) => {
+        redefineStarColor(item);
         return <div key={index} className="post-result-container">
           <div className="post-result-container-heading">
             <Image src={item.profileUrl} width={100} height={100} alt="logo" className="post-owner-pfp" />
             <div>
               <div className="post-result-username-container">
                 <div className="post-result-username">@{item.by}</div>
+                {
+                  item.type !== 'BASIC' ? <FaStar fill={`${starColor}`} /> : null
+                }
                 <div className="post-result-created-at">.  {convertTime(item.createdAt)}</div>
               </div>
               <div>{item.description}</div>
             </div>
           </div>
           {
-            discover.imgurl === "" || discover.imgurl === null ? null : <Image className="post-result-image" src={item.imgurl} width={100} height={100} alt="logo" />
+            discover.imgurl === "" || discover.imgurl === null ? null : <Image className="post-result-image" src={item.imgurl} width={100} height={100} alt="logo" unoptimized />
           }
           <div className="post-result-stat">
             <div className="star-container">
@@ -73,6 +89,10 @@ export default function PostContainer({ loginData }) {
             <div className="save-container">
               <CiBookmark />
               <div>{item.save}</div>
+            </div>
+            <div className="repost-container">
+              <BiRepost />
+              <div>{item.repostCount}</div>
             </div>
           </div>
         </div>

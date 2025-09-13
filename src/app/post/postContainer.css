@@ -1,11 +1,11 @@
 #post-results{
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+
 }
 
 .post-result-container{
-  padding: 20px;
+  padding: 20px 0px 10px 20px;
   border-bottom: 0.5px solid var(--border-color);
 }
 
@@ -40,8 +40,8 @@
 }
 
 .post-result-image{
-  height: 300px;
-  width: 300px;
+  height: 350px;
+  width: 320px;
   object-fit: cover;
   border-radius: 20px;
 }
@@ -49,11 +49,17 @@
 .post-result-stat{
   display: flex;
   margin-top: 10px;
+  padding-top: 10px;
+  justify-content: space-around;
 }
 
-.star-container, .save-container{
-  flex: 0 0 50%;
+.star-container, .save-container, .repost-container{
   display: flex;
   justify-content: center;
   column-gap: 10px;
+  cursor: pointer;
+}
+
+.star-container:hover *, .save-container:hover *, .repost-container:hover *{
+  color: var(--theme-color);
 }

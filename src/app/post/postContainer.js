@@ -6,26 +6,46 @@ import { FaStar } from "react-icons/fa6";
 import Image from "next/image";
 import "./postContainer.css"
 
-export default function PostContainer({ loginData }) {
-  const [discover, setDiscover] = useState(null);
+export default function PostContainer({ loginData, postType }) {
+  const [post, setPost] = useState(null);
   let starColor = 'white';
 
-  useEffect(() => {
-    const getDiscoverPost = async () => {
-      const res = await fetch("http://localhost:8080/api/discover", {
-        method: 'GET',
-        headers: {
-          offset: 0
-        }
-      });
-      const data = await res.json();
-      if (data.response === 'success') {
-        setDiscover(data.posts);
-        console.log(data.posts)
+  const getDiscoverPost = async () => {
+    const res = await fetch("http://localhost:8080/api/discover", {
+      method: 'GET',
+      headers: {
+        offset: 0
       }
+    });
+    const data = await res.json();
+    if (data.response === 'success') {
+      setPost(data.posts);
     }
+  }
+
+  const getFollowingPost = async() =>{
+    const res = await fetch("http://localhost:8080/api/following", {
+      method: 'GET',
+      headers: {
+        offset: 0,
+      }
+    });
+    const data = await res.json();
+    if(data.response === 'success'){
+      setPost(data.posts);
+    }
+  }
+
+  useEffect(() => {
     getDiscoverPost();
   }, [loginData]);
+
+  if(postType === 'all'){
+    getDiscoverPost();
+  }
+  else{
+    getFollowingPost();
+  }
 
   const redefineStarColor = (item) =>{
     if(item.type === 'LEGEND'){
@@ -62,7 +82,7 @@ export default function PostContainer({ loginData }) {
 
   return <div id="post-results">
     {
-      discover ? discover.map((item, index) => {
+      post ? post.map((item, index) => {
         redefineStarColor(item);
         return <div key={index} className="post-result-container">
           <div className="post-result-container-heading">
@@ -79,7 +99,7 @@ export default function PostContainer({ loginData }) {
             </div>
           </div>
           {
-            discover.imgurl === "" || discover.imgurl === null ? null : <Image className="post-result-image" src={item.imgurl} width={100} height={100} alt="logo" unoptimized />
+            post.imgurl === "" || post.imgurl === null ? null : <Image className="post-result-image" src={item.imgurl} width={100} height={100} alt="logo" unoptimized />
           }
           <div className="post-result-stat">
             <div className="star-container">

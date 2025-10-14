@@ -13,6 +13,7 @@ export default function Home({ loginCredentials }) {
   const [loginData, setLoginData] = useState(null);
   const [imageList, setImageList] = useState([]);
   const [emojiDisplay, setEmojiDisplay] = useState(false);
+  const [postType, setPostType] =  useState('all');
 
   useEffect(() => {
     if (loginCredentials) {
@@ -76,10 +77,20 @@ export default function Home({ loginCredentials }) {
     e.target.value = null;
   };
 
+  const filterPost = (e) =>{
+    const type = e.currentTarget;
+    if(type === 'Discover'){
+      setPostType('all');
+    }
+    else{
+      setPostType('following');
+    }
+  }
+
   return <div id="home-container" className="middle-container">
     <div id="homepage-filter">
-      <div id="home-filter-discovery">Discover</div>
-      <div id="home-filter-following">Following</div>
+      <div id="home-filter-discovery" onClick={filterPost}>Discover</div>
+      <div id="home-filter-following" onClick={filterPost}>Following</div>
     </div>
     <div id="post-container">
       <div id="post-write-container">
@@ -107,6 +118,6 @@ export default function Home({ loginCredentials }) {
         zIndex: 1000,
       }}
     />
-    <PostContainer loginData={loginData}/>
+    <PostContainer loginData={loginData} postType={postType}/>
   </div>
 }

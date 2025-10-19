@@ -78,7 +78,7 @@ export default function Home({ loginCredentials }) {
   };
 
   const filterPost = (e) =>{
-    const type = e.currentTarget;
+    const type = e.currentTarget.textContent;
     if(type === 'Discover'){
       setPostType('all');
     }

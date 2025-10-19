@@ -14,7 +14,7 @@ export default function PostContainer({ loginData, postType }) {
     const res = await fetch("http://localhost:8080/api/discover", {
       method: 'GET',
       headers: {
-        offset: 0
+        offset: 0,
       }
     });
     const data = await res.json();
@@ -23,35 +23,35 @@ export default function PostContainer({ loginData, postType }) {
     }
   }
 
-  const getFollowingPost = async() =>{
+  const getFollowingPost = async () => {
     const res = await fetch("http://localhost:8080/api/following", {
       method: 'GET',
       headers: {
         offset: 0,
+        username: loginData.username,
       }
     });
     const data = await res.json();
-    if(data.response === 'success'){
+    if (data.response === 'success') {
       setPost(data.posts);
+      console.log(data);
     }
   }
+  useEffect(()=>{
+    if (!loginData) return;
+    if (postType === 'all') {
+      getDiscoverPost();
+    }
+    else {
+      getFollowingPost();
+    } 
+  },[loginData, postType])
 
-  useEffect(() => {
-    getDiscoverPost();
-  }, [loginData]);
-
-  if(postType === 'all'){
-    getDiscoverPost();
-  }
-  else{
-    getFollowingPost();
-  }
-
-  const redefineStarColor = (item) =>{
-    if(item.type === 'LEGEND'){
+  const redefineStarColor = (item) => {
+    if (item.type === 'LEGEND') {
       starColor = '#6614b8';
     }
-    else{
+    else {
       starColor = 'gold';
     }
   }

@@ -3,6 +3,7 @@ import { CiStar } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 import { BiRepost } from "react-icons/bi";
 import { FaStar } from "react-icons/fa6";
+import { Ring } from 'ldrs/react';
 import Image from "next/image";
 import "./postContainer.css"
 
@@ -37,15 +38,17 @@ export default function PostContainer({ loginData, postType }) {
       console.log(data);
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     if (!loginData) return;
     if (postType === 'all') {
+      setPost(null);
       getDiscoverPost();
     }
     else {
+      setPost(null);
       getFollowingPost();
-    } 
-  },[loginData, postType])
+    }
+  }, [loginData, postType])
 
   const redefineStarColor = (item) => {
     if (item.type === 'LEGEND') {
@@ -116,7 +119,9 @@ export default function PostContainer({ loginData, postType }) {
             </div>
           </div>
         </div>
-      }) : null
+      }) : <div id="post-loader">
+        <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
+      </div>
     }
   </div>
 }

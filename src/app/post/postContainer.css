@@ -63,3 +63,9 @@
 .star-container:hover *, .save-container:hover *, .repost-container:hover *{
   color: var(--theme-color);
 }
+
+#post-loader{
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}

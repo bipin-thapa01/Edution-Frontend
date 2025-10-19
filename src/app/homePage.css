@@ -33,12 +33,16 @@
   top: 30px;
   border-radius: 10px;
   left: -0px;
-  display: var(--after-all, block);
+}
+
+#home-filter-discovery:after{
+  display: var(--after-discovery, block);
 }
 
 #home-filter-following:after{
   width: 75px;
   display: none;
+  display: var(--after-following, none);
 }
 
 #post-container{

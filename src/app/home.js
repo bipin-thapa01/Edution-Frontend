@@ -81,9 +81,13 @@ export default function Home({ loginCredentials }) {
     const type = e.currentTarget.textContent;
     if(type === 'Discover'){
       setPostType('all');
+      document.getElementById("home-filter-discovery").style.setProperty("--after-discovery","block");
+      document.getElementById("home-filter-following").style.setProperty("--after-following","none");
     }
     else{
       setPostType('following');
+      document.getElementById("home-filter-discovery").style.setProperty("--after-discovery","none");
+      document.getElementById("home-filter-following").style.setProperty("--after-following","block");
     }
   }
 

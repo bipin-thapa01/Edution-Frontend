@@ -16,11 +16,13 @@ export default function PostContainer({ loginData, postType }) {
       method: 'GET',
       headers: {
         offset: 0,
+        username: loginData.username,
       }
     });
     const data = await res.json();
     if (data.response === 'success') {
       setPost(data.posts);
+      console.log(data);
     }
   }
 
@@ -35,7 +37,6 @@ export default function PostContainer({ loginData, postType }) {
     const data = await res.json();
     if (data.response === 'success') {
       setPost(data.posts);
-      console.log(data);
     }
   }
   useEffect(() => {
@@ -83,6 +84,15 @@ export default function PostContainer({ loginData, postType }) {
     }
   }
 
+  const likePost = (isStarred, id) => {
+    if(isStarred){
+
+    }
+    else{
+      
+    }
+  }
+
   return <div id="post-results">
     {
       post ? post.map((item, index) => {
@@ -105,8 +115,10 @@ export default function PostContainer({ loginData, postType }) {
             post.imgurl === "" || post.imgurl === null ? null : <Image className="post-result-image" src={item.imgurl} width={100} height={100} alt="logo" unoptimized />
           }
           <div className="post-result-stat">
-            <div className="star-container">
-              <CiStar />
+            <div className="star-container" onClick={likePost(item.isStarred, item.id)}>
+              {
+                item.isStarred ? <CiStar fill="#6614b8"/> : <CiStar />
+              }
               <div>{item.star}</div>
             </div>
             <div className="save-container">

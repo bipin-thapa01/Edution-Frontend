@@ -5,7 +5,7 @@
 }
 
 .post-result-container{
-  padding: 20px 0px 10px 20px;
+  padding: 20px 20px 0px 20px;
   border-bottom: 0.5px solid var(--border-color);
 }
 
@@ -49,7 +49,7 @@
 .post-result-stat{
   display: flex;
   margin-top: 10px;
-  padding-top: 10px;
+  margin-bottom: 10px;
   justify-content: space-around;
 }
 
@@ -57,11 +57,15 @@
   display: flex;
   justify-content: center;
   column-gap: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   cursor: pointer;
+  flex: 0.33;
+  border-radius: 10px;
 }
 
-.star-container:hover *, .save-container:hover *, .repost-container:hover *{
-  color: var(--theme-color);
+.star-container:hover, .star-container:hover *, .save-container:hover, .save-container:hover *, .repost-container:hover, .repost-container:hover *{
+  background-color: var(--selected-color);
 }
 
 #post-loader{

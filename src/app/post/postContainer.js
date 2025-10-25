@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { CiStar } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 import { BiRepost } from "react-icons/bi";
-import { FaStar } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa";
 import { Ring } from 'ldrs/react';
 import Image from "next/image";
 import "./postContainer.css"
@@ -84,12 +83,56 @@ export default function PostContainer({ loginData, postType }) {
     }
   }
 
-  const likePost = (isStarred, id) => {
-    if(isStarred){
-
-    }
-    else{
+  const likePost = async (isStarred, postId, userId) => {
+    let res = await fetch("http://localhost:8080/api/specific-post", {
+      method: "GET",
+      headers: {
+        postId: `${postId}`,
+        userId: `${userId}`,
+      }
+    });
+    let data = await res.json();
+    if (data.isStarred) {
+      document.getElementById(`react${postId}`).style.fill = '#b2b2b2';
+      let starCount = document.getElementById(`star-count${postId}`);
+      starCount.innerText = parseInt(starCount.innerText) - 1;
+      document.getElementById(`star-container${postId}`).style.pointerEvents = 'none';
+      setTimeout(() => {
+        document.getElementById(`star-container${postId}`).style.pointerEvents = 'auto';
+      }, 5000);
       
+      let res1 = await fetch("http://localhost:8080/api/unstar", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          postId: `${postId}`,
+          userId: `${userId}`
+        })
+      });
+      let data1 = await res1.json();
+    }
+    else {
+      document.getElementById(`react${postId}`).style.fill = '#6614b8';
+      let starCount = document.getElementById(`star-count${postId}`);
+      starCount.innerText = parseInt(starCount.innerText) + 1;
+      document.getElementById(`star-container${postId}`).style.pointerEvents = 'none';
+      setTimeout(() => {
+        document.getElementById(`star-container${postId}`).style.pointerEvents = 'auto';
+      }, 5000);
+      
+      let res2 = await fetch("http://localhost:8080/api/star", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          postId: `${postId}`,
+          userId: `${userId}`
+        })
+      });
+      let data2 = await res2.json();
     }
   }
 
@@ -115,11 +158,9 @@ export default function PostContainer({ loginData, postType }) {
             post.imgurl === "" || post.imgurl === null ? null : <Image className="post-result-image" src={item.imgurl} width={100} height={100} alt="logo" unoptimized />
           }
           <div className="post-result-stat">
-            <div className="star-container" onClick={likePost(item.isStarred, item.id)}>
-              {
-                item.isStarred ? <CiStar fill="#6614b8"/> : <CiStar />
-              }
-              <div>{item.star}</div>
+            <div id={`star-container${item.postId}`} className="star-container" onClick={() => likePost(item.isStarred, item.postId, item.userId)}>
+              <FaStar id={`react${item.postId}`} fill={item.isStarred ? '#6614b8' : '#b2b2b2'} />
+              <div id={`star-count${item.postId}`}>{item.star}</div>
             </div>
             <div className="save-container">
               <CiBookmark />

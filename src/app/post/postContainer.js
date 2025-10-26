@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { CiBookmark } from "react-icons/ci";
-import { BiRepost } from "react-icons/bi";
+import { FaBookmark } from "react-icons/fa6";
+import { GrPowerCycle } from "react-icons/gr";
 import { FaStar } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { Ring } from 'ldrs/react';
 import Image from "next/image";
 import "./postContainer.css"
@@ -136,6 +137,61 @@ export default function PostContainer({ loginData, postType }) {
     }
   }
 
+  const bookmarkPost = async (bookmarkType, postId, userId) => {
+    let res = await fetch("http://localhost:8080/api/check-bookmark",{
+      method: 'GET',
+      headers: {
+        userId: `${userId}`,
+        bookmarkId: `${postId}`,
+      }
+    });
+    let data = await res.json();
+    if(data.response === 'exist'){
+      document.getElementById(`bookmark-container${postId}`).style.pointerEvents = 'none';
+      document.getElementById(`bookmark${postId}`).style.fill = '#b2b2b2';
+      let bookmarkCount = document.getElementById(`bookmark-count${postId}`);
+      bookmarkCount.innerText = parseInt(bookmarkCount.innerText) - 1;
+      setTimeout(()=>{
+        document.getElementById(`bookmark-container${postId}`).style.pointerEvents = 'auto';
+      },5000);
+      let res1 = await fetch("http://localhost:8080/api/bookmark",{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          bookmark: `${bookmarkType}`,
+          bookmarkId: `${postId}`,
+          userId: `${userId}`,
+          update: false,
+        })
+      });
+      let data1 = await res1.json();
+    }
+    else{
+      document.getElementById(`bookmark-container${postId}`).style.pointerEvents = 'none';
+      document.getElementById(`bookmark${postId}`).style.fill = '#6614b8';
+      let bookmarkCount = document.getElementById(`bookmark-count${postId}`);
+      bookmarkCount.innerText = parseInt(bookmarkCount.innerText) + 1;
+      setTimeout(()=>{
+        document.getElementById(`bookmark-container${postId}`).style.pointerEvents = 'auto';
+      },5000);
+      let res2 = await fetch("http://localhost:8080/api/bookmark",{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          bookmark: `${bookmarkType}`,
+          bookmarkId: `${postId}`,
+          userId: `${userId}`,
+          update: true,
+        })
+      });
+      let data2 = await res2.json();
+    }
+  }
+
   return <div id="post-results">
     {
       post ? post.map((item, index) => {
@@ -159,15 +215,15 @@ export default function PostContainer({ loginData, postType }) {
           }
           <div className="post-result-stat">
             <div id={`star-container${item.postId}`} className="star-container" onClick={() => likePost(item.isStarred, item.postId, item.userId)}>
-              <FaStar id={`react${item.postId}`} fill={item.isStarred ? '#6614b8' : '#b2b2b2'} />
+              <FaHeart className="heart" id={`react${item.postId}`} fill={item.isStarred ? '#6614b8' : '#b2b2b2'} />
               <div id={`star-count${item.postId}`}>{item.star}</div>
             </div>
-            <div className="save-container">
-              <CiBookmark />
-              <div>{item.save}</div>
+            <div id={`bookmark-container${item.postId}`} className="save-container" onClick={()=> {bookmarkPost('post', item.postId, item.userId)}}>
+              <FaBookmark id={`bookmark${item.postId}`} fill={item.isBookmarked ? '#6614b8' : '#b2b2b2'}/>
+              <div id={`bookmark-count${item.postId}`}>{item.save}</div>
             </div>
             <div className="repost-container">
-              <BiRepost />
+              <GrPowerCycle />
               <div>{item.repostCount}</div>
             </div>
           </div>

@@ -97,7 +97,7 @@ export default function Nav({ loginCredentials }) {
         <FaRegBell className="nav-option-logo" />
         <div>Notifications</div>
       </div>
-      <div id="remember" className="nav-option">
+      <div id="remember" className="nav-option" onClick={() => router.push('/bookmark')}>
         <FaBookmark className="nav-option-logo" />
         <div>Remember</div>
       </div>

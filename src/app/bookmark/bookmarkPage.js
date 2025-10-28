@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Nav from "../nav/nav";
+import Bookmark from "./bookmark";
+import RightContainer from "../right/rightContainer";
+import "./bookmark.css";
 
 export default function BookmarkPage(){
   const [bookmarkData, setBookmarkData] = useState(null);
@@ -19,7 +22,6 @@ export default function BookmarkPage(){
         }
       });
       const data = await res.json();
-      console.log(data);
       if(data.response === 'success'){
         setBookmarkData(data);
         setUserData(data.res);
@@ -37,6 +39,8 @@ export default function BookmarkPage(){
   return(
     <div id="bookmark-page">
       <Nav loginCredentials={userData}/>
+      <Bookmark bookmarkData={bookmarkData?.bookmarkDTOs}/>
+      <RightContainer loginCredentials={userData}/>
     </div>
   );
 }

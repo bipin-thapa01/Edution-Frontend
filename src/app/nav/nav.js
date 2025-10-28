@@ -42,6 +42,12 @@ export default function Nav({ loginCredentials }) {
       })
       notification.classList.add('option-selected');
     }
+    else if(lastUrl === 'bookmark'){
+      allOptions.forEach(option => {
+        option.classList.remove('option-selected');
+      })
+      remember.classList.add('option-selected');
+    }
   }, []);
 
   useEffect(()=>{

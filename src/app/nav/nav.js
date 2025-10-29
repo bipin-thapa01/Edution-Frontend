@@ -42,7 +42,7 @@ export default function Nav({ loginCredentials }) {
       })
       notification.classList.add('option-selected');
     }
-    else if(lastUrl === 'bookmark'){
+    else if (lastUrl === 'bookmark') {
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
       })
@@ -50,25 +50,25 @@ export default function Nav({ loginCredentials }) {
     }
   }, []);
 
-  useEffect(()=>{
-    if(loginCredentials){
-      if(loginCredentials.userDTO){
+  useEffect(() => {
+    if (loginCredentials) {
+      if (loginCredentials.userDTO) {
         setLoginData(loginCredentials.userDTO);
       }
-      else{
+      else {
         setLoginData(loginCredentials.user);
       }
-      if((loginCredentials.user && loginCredentials.user.type === 'PRO') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'PRO')){
+      if ((loginCredentials.user && loginCredentials.user.type === 'PRO') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'PRO')) {
         setStarColor('blue');
       }
-      else if((loginCredentials.user && loginCredentials.user.type === 'LEGEND') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'LEGEND')){
+      else if ((loginCredentials.user && loginCredentials.user.type === 'LEGEND') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'LEGEND')) {
         setStarColor('#6614b8');
       }
-      else{
+      else {
         setStarColor('gold')
       }
     }
-  },[loginCredentials]);
+  }, [loginCredentials]);
 
   return <div id="nav">
     <div id="nav-logo">
@@ -81,51 +81,54 @@ export default function Nav({ loginCredentials }) {
           <div id="nav-username-container">
             <div id="nav-user-name">{loginData.name}</div>
             {
-              loginData.type !== 'BASIC' ? <FaStar fill={`${starColor}`}/> : null
+              loginData.type !== 'BASIC' ? <FaStar fill={`${starColor}`} /> : null
             }
           </div>
           <div id="nav-user-username">@{loginData.username}</div>
         </div>
-      </div> : <div id="nav-user-loading">
-        <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
+      </div> : <div>
+        <div id="nav-user-loading">
+          <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
+        </div>
+        <div id="nav-optional-loading"></div>
       </div>
     }
     <div id="nav-options">
       <div id="home" className="nav-option" onClick={() => router.push('/')}>
         <MdHome className="nav-option-logo" />
-        <div>Homepage</div>
+        <div className="nav-opt-desc">Homepage</div>
       </div>
       <div id="search" className="nav-option">
         <IoMdSearch className="nav-option-logo" />
-        <div>Search</div>
+        <div className="nav-opt-desc">Search</div>
       </div>
       <div id="notification" className="nav-option" onClick={() => router.push('/notification')}>
         <FaRegBell className="nav-option-logo" />
-        <div>Notifications</div>
+        <div className="nav-opt-desc">Notifications</div>
       </div>
       <div id="remember" className="nav-option" onClick={() => router.push('/bookmark')}>
         <FaBookmark className="nav-option-logo" />
-        <div>Remember</div>
+        <div className="nav-opt-desc">Remember</div>
       </div>
       <div id="friend" className="nav-option">
         <FaUserPlus className="nav-option-logo" />
-        <div>Friends</div>
+        <div className="nav-opt-desc">Friends</div>
       </div>
       <div id="zone" className="nav-option">
         <MdGroups2 className="nav-option-logo" />
-        <div>Zone</div>
+        <div className="nav-opt-desc">Zone</div>
       </div>
       <div id="message" className="nav-option">
         <TbMessage className="nav-option-logo" />
-        <div>Message</div>
+        <div className="nav-opt-desc">Message</div>
       </div>
       <div id="profile" className="nav-option">
         <IoPerson className="nav-option-logo" />
-        <div>Profile</div>
+        <div className="nav-opt-desc">Profile</div>
       </div>
       <div id="settings" className="nav-option">
         <FaGear className="nav-option-logo" />
-        <div>Settings</div>
+        <div className="nav-opt-desc">Settings</div>
       </div>
       <button id="nav-post">Post</button>
     </div>

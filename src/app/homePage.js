@@ -5,6 +5,7 @@ import "./homePage.css";
 import Nav from "./nav/nav";
 import Home from "./home";
 import RightContainer from "./right/rightContainer";
+import LowerNav from "./lowerNav/lowerNav";
 
 export default function HomePage() {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function HomePage() {
       <Nav loginCredentials={fetchData} />
       <Home loginCredentials={fetchData} />
       <RightContainer loginCredentials={fetchData} />
+      <LowerNav />
     </div>
   );
 }

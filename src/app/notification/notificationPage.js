@@ -7,6 +7,7 @@ import 'ldrs/react/Ring.css'
 import Nav from "../nav/nav";
 import Notification from "./notification";
 import RightContainer from "../right/rightContainer";
+import LowerNav from "../lowerNav/lowerNav";
 
 export default function NotificationPage() {
   const router = useRouter();
@@ -42,6 +43,7 @@ export default function NotificationPage() {
       <Nav loginCredentials={fetchData} />
       <Notification notifications={fetchData}/>
       <RightContainer loginCredentials={fetchData} />
+      <LowerNav />
     </div>
   );
 }

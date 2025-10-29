@@ -28,6 +28,9 @@ export default function Bookmark({ bookmarkData }) {
                   <div>{item.postDesc}</div>
                 </div>
               </div>
+              <div className='post-image-container'>
+                <Image className='bookmark-post-image' fill src={item.postUrl} alt='Post Image'/>
+              </div>
             </div>
           })
             : <div className="loader">

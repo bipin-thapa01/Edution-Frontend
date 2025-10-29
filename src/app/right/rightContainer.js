@@ -1,5 +1,7 @@
+import "./rightContainer.css";
+
 export default function RightContainer(){
-  return <div>
+  return <div id="right-container">
     
   </div>
 }

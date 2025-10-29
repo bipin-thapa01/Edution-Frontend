@@ -18,9 +18,9 @@
 
 #homepage, #notification-page, #bookmark-page{
   max-height: 100vh;
-  width: 1200px;
-  margin-left: calc(50vw - 600px);
+  width: 100vw;
   display: flex;
+  justify-content: center;
 }
 
 #homepage{
@@ -31,4 +31,22 @@
   border-left: 0.5px solid var(--border-color);
   border-right: 0.5px solid var(--border-color);
   flex: 0 0 648px;
+}
+
+@media (max-width:1200px){
+  #homepage, #notification-page, #bookmark-page{
+    width: 100vw;
+  }
+}
+
+@media(max-width:750px){
+  .middle-container{
+    flex: 0 0 648px;
+  }
+}
+
+@media (max-width: 730px){
+  .middle-container{
+    flex: 0 0 100vw;
+  }
 }

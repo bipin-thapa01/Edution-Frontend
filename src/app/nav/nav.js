@@ -72,7 +72,7 @@ export default function Nav({ loginCredentials }) {
 
   return <div id="nav">
     <div id="nav-logo">
-      ED
+      Socialz
     </div>
     {
       loginData ? <div id="nav-user-info">
@@ -98,7 +98,7 @@ export default function Nav({ loginCredentials }) {
         <MdHome className="nav-option-logo" />
         <div className="nav-opt-desc">Homepage</div>
       </div>
-      <div id="search" className="nav-option">
+      <div id="search" className="nav-option" onClick={()=>router.push('/search')}>
         <IoMdSearch className="nav-option-logo" />
         <div className="nav-opt-desc">Search</div>
       </div>
@@ -130,7 +130,6 @@ export default function Nav({ loginCredentials }) {
         <FaGear className="nav-option-logo" />
         <div className="nav-opt-desc">Settings</div>
       </div>
-      <button id="nav-post">Post</button>
     </div>
   </div>
 }

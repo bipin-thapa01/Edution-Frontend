@@ -9,6 +9,16 @@
   display: none;
 }
 
+.bookmark-message-container{
+  display: flex;
+  column-gap: 5px;
+}
+
+.bookmark-time{
+  color: rgb(72, 72, 72);
+  font-size: 15px;
+}
+
 #bookmark-container-title {
   height: 50px;
   padding: 20px 0px 10px 10px;

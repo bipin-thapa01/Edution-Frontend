@@ -65,13 +65,13 @@ export default function PostContainer({ loginData, postType }) {
     const now = new Date();
     const diff = now - prev;
     if (diff / (1000 * 60 * 60 * 24 * 30 * 12) >= 1) {
-      return ` ${Math.floor(diff / (1000 * 60 * 60 * 24 * 30 * 12))} y`;
+      return ` ${Math.floor(diff / (1000 * 60 * 60 * 24 * 30 * 12))} yrs`;
     }
     else if (diff / (1000 * 60 * 60 * 24 * 30) >= 1) {
-      return ` ${Math.floor(diff / (1000 * 60 * 60 * 24 * 30))} m`;
+      return ` ${Math.floor(diff / (1000 * 60 * 60 * 24 * 30))} mon`;
     }
     else if (diff / (1000 * 60 * 60 * 24) >= 1) {
-      return ` ${Math.floor(diff / (1000 * 60 * 60 * 24))} d`;
+      return ` ${Math.floor(diff / (1000 * 60 * 60 * 24))} days`;
     }
     else if (diff / (1000 * 60 * 60) >= 1) {
       return ` ${Math.floor(diff / (1000 * 60 * 60))} hr`;

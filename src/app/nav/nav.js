@@ -48,6 +48,12 @@ export default function Nav({ loginCredentials }) {
       })
       remember.classList.add('option-selected');
     }
+    else if (lastUrl === 'search'){
+      allOptions.forEach(option => {
+        option.classList.remove('option-selected');
+      })
+      search.classList.add('option-selected');
+    }
   }, []);
 
   useEffect(() => {

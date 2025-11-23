@@ -10,17 +10,17 @@ import Image from "next/image";
 export default function Search({ fetchData }) {
 
   const [data, setData] = useState(null);
+  const [searchType, setSearchType] = useState('user');
+  const [searchContent, setSearchContent] = useState(null);
   const friendButton = useRef(null);
 
   useEffect(() => {
     if (!fetchData) return;
-
     setData(fetchData.userDTOs);
-    console.log(fetchData);
   }, [fetchData]);
 
-  const isFriend = async (username, friendUsername, index) =>{
-    const res = await fetch("http://localhost:8080/api/is-friend",{
+  const isFriend = async (username, friendUsername, index) => {
+    const res = await fetch("http://localhost:8080/api/is-friend", {
       method: 'GET',
       headers: {
         username: `${username}`,
@@ -28,34 +28,53 @@ export default function Search({ fetchData }) {
       }
     });
     const data = await res.json();
-    if(data.response === 'friend'){
+    if (data.response === 'friend') {
       friendButton.current.style.backgroundColor = '#2e2e2e';
       return true;
     }
-    else{
+    else {
       friendButton.current.style.backgroundColor = '#6614b8';
 
       return false;
     }
   }
 
-  const searchKey = async (e, type='user') =>{
+  const searchKey = async (e) => {
     let key = e.currentTarget.value;
-    let res = await fetch("http://localhost:8080/api/search", {
-    method: 'GET',
-    headers: {
-      key : `${key}`,
-      type: `${type}`
+    if (key === '') {
+      setSearchContent(null);
+      return;
     }
+    let res = await fetch("http://localhost:8080/api/search", {
+      method: 'GET',
+      headers: {
+        key: `${key}`,
+      }
     });
     let data = await res.json();
+    setSearchContent(data);
+    console.log(data)
+  }
+
+  const changeSearchResultType = (e) => {
+    let type = e.currentTarget.innerText;
+    if (type === 'Users') {
+      document.getElementById('search-type-user').style.setProperty('--after-search-user', 'block');
+      document.getElementById('search-type-post').style.setProperty('--after-search-post', 'none');
+      setSearchType('user');
+    }
+    else {
+      document.getElementById('search-type-user').style.setProperty('--after-search-user', 'none');
+      document.getElementById('search-type-post').style.setProperty('--after-search-post', 'block');
+      setSearchType('post');
+    }
   }
 
   return (
     <div className="middle-container">
       <div id="search-container">
         <FaSearch />
-        <input id="search-keyword" type="text" placeholder="Search" autoComplete="off" onChange={searchKey}/>
+        <input id="search-keyword" type="text" placeholder="Search" autoComplete="off" onChange={searchKey} />
       </div>
       <div id="latest-user-container">
         <div id="latest-user-title">
@@ -92,20 +111,61 @@ export default function Search({ fetchData }) {
                   <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
                 </div>
             }
-            </Swiper>
+          </Swiper>
         </div>
       </div>
       <div id="search-result-container">
         <div id="search-result-type">
-          <div>Users</div>
-          <div>Posts</div>
+          <div id="search-type-user" onClick={changeSearchResultType}>Users</div>
+          <div id="search-type-post" onClick={changeSearchResultType}>Posts</div>
         </div>
-        {
-          "" ? <div>
+        <div id="search-results">
+          {
+            searchContent ? (
+              searchType === 'user' ? (
+                searchContent.userDTOs?.length > 0 ? (
+                  searchContent.userDTOs.map((item, index) => (
+                    <div className="search-result-user" key={index}>
+                      <div id="search-result-profile">
+                        <Image src={item.imgurl} alt="userImage" fill unoptimized style={{ objectFit: 'cover' }} />
+                      </div>
+                      <div className="id-details">
+                        <div>{item.name}</div>
+                        <div className="id-username">@{item.username}</div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div id="search-result-default">No result</div>
+                )
+              ) : (
+                searchContent.postDTOs?.length > 0 ? (
+                  searchContent.postDTOs.map((item, index) => (
+                    <div key={index}>
+                      <div>
+                        <div id="search-result-profile">
+                          <Image src={item.profileUrl} alt="userImage" fill unoptimized />
+                        </div>
+                        <div>
+                          <div>{item.by}</div>
+                          <div>{item.description}</div>
+                        </div>
+                      </div>
+                      <div id="search-post-image">
+                        <Image src={item.imgurl} alt="postImage" fill unoptimized />
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div id="search-result-default">No result</div>
+                )
+              )
+            ) : (
+              <div id="search-result-default">Search</div>
+            )
 
-          </div> : 
-          <div id="search-result-result">No result</div>
-        }
+          }
+        </div>
       </div>
     </div>
   );

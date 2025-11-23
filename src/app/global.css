@@ -31,6 +31,13 @@
   border-left: 0.5px solid var(--border-color);
   border-right: 0.5px solid var(--border-color);
   flex: 0 0 648px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.middle-container::-webkit-scrollbar{
+  display: none;
 }
 
 @media (max-width:1200px){

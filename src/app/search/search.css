@@ -70,7 +70,7 @@
   font-size: 14px;
 }
 
-.friend-button{
+.search-friend-button{
   background-color: var(--theme-color);
   padding: 5px 10px;
   border-radius: 5px;
@@ -140,6 +140,7 @@
   flex-wrap: wrap;
   padding: 10px 5px;
   column-gap: 10px;
+  width: 100%;
 }
 
 .search-result-user{

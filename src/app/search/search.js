@@ -18,7 +18,6 @@ export default function Search({ fetchData }) {
   useEffect(() => {
     if (!fetchData) return;
     setData(fetchData.userDTOs);
-    console.log(fetchData)
   }, [fetchData]);
 
   const isFriend = async (username, friendUsername, index) => {
@@ -36,7 +35,6 @@ export default function Search({ fetchData }) {
     }
     else {
       friendButton.current.style.backgroundColor = '#6614b8';
-
       return false;
     }
   }
@@ -104,7 +102,7 @@ export default function Search({ fetchData }) {
                       <div>{item.name}</div>
                       <div className="id-username">@{item.username}</div>
                     </div>
-                    <div ref={friendButton} id={`friend-button${index}`} className="friend-button">
+                    <div ref={friendButton} id={`friend-button${index}`} className="search-friend-button">
                       {
                         isFriend(fetchData.userDTO.username, item.username, index) ? "Friends" : "Send Request"
                       }

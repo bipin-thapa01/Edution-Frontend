@@ -1,6 +1,7 @@
 #post-results{
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .post-result-container{

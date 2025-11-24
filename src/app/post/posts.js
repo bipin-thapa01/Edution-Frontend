@@ -7,17 +7,6 @@ import Image from "next/image";
 import "./postContainer.css"
 
 export default function Posts({post}) {
-  let starColor = 'white';
-
-  const redefineStarColor = (item) => {
-    if (item.type === 'LEGEND') {
-      starColor = '#6614b8';
-    }
-    else {
-      starColor = 'gold';
-    }
-  }
-
   const convertTime = (date) => {
     const prev = new Date(date);
     const now = new Date();
@@ -153,16 +142,12 @@ export default function Posts({post}) {
   return <div id="post-results">
     {
       post ? post.map((item, index) => {
-        redefineStarColor(item);
         return <div key={index} className="post-result-container">
           <div className="post-result-container-heading">
             <Image src={item.profileUrl} width={100} height={100} alt="logo" className="post-owner-pfp" />
             <div>
               <div className="post-result-username-container">
                 <div className="post-result-username">@{item.by}</div>
-                {
-                  item.type !== 'BASIC' ? <FaStar fill={`${starColor}`} /> : null
-                }
                 <div className="post-result-created-at">.  {convertTime(item.createdAt)}</div>
               </div>
               <div>{item.description}</div>

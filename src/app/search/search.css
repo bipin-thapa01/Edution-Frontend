@@ -155,3 +155,25 @@
   row-gap: 10px;
   cursor: pointer;
 }
+
+.search-result-post{
+  flex: 0 0 95%;
+  overflow: hidden;
+}
+
+.search-result-post-info{
+  display: flex;
+  column-gap: 10px;
+}
+
+.search-result-post-profile{
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.search-result-post-username{
+  color: gray;
+}

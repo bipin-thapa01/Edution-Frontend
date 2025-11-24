@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import Posts from "../post/posts";
 import { FaSearch } from "react-icons/fa";
 import { Ring } from 'ldrs/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,6 +18,7 @@ export default function Search({ fetchData }) {
   useEffect(() => {
     if (!fetchData) return;
     setData(fetchData.userDTOs);
+    console.log(fetchData)
   }, [fetchData]);
 
   const isFriend = async (username, friendUsername, index) => {
@@ -49,6 +51,7 @@ export default function Search({ fetchData }) {
       method: 'GET',
       headers: {
         key: `${key}`,
+        username: `${fetchData.userDTO.username}`,
       }
     });
     let data = await res.json();
@@ -140,22 +143,7 @@ export default function Search({ fetchData }) {
                 )
               ) : (
                 searchContent.postDTOs?.length > 0 ? (
-                  searchContent.postDTOs.map((item, index) => (
-                    <div key={index}>
-                      <div>
-                        <div id="search-result-profile">
-                          <Image src={item.profileUrl} alt="userImage" fill unoptimized />
-                        </div>
-                        <div>
-                          <div>{item.by}</div>
-                          <div>{item.description}</div>
-                        </div>
-                      </div>
-                      <div id="search-post-image">
-                        <Image src={item.imgurl} alt="postImage" fill unoptimized />
-                      </div>
-                    </div>
-                  ))
+                  <Posts post={searchContent.postDTOs}/>
                 ) : (
                   <div id="search-result-default">No result</div>
                 )

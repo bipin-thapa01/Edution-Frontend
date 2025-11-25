@@ -15,6 +15,7 @@ import { FaGear } from "react-icons/fa6";
 import './nav.css';
 
 export default function Nav({ loginCredentials }) {
+  
   const router = useRouter();
   const [loginData, setLoginData] = useState(null);
   const [starColor, setStarColor] = useState('white');

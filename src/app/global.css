@@ -16,7 +16,7 @@
   color: var(--text-color);
 }
 
-#homepage, #notification-page, #bookmark-page, #search-page{
+#homepage, #notification-page, #bookmark-page, #search-page, #user-profile{
   max-height: 100vh;
   width: 100vw;
   display: flex;

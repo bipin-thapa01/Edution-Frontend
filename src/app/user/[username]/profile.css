@@ -35,7 +35,7 @@
 
 #user-profile-background{
   width: 100%;
-  height: 200px;
+  height: 230px;
   position: relative;
   overflow: hidden;
 }
@@ -59,8 +59,12 @@
 }
 
 #user-profile-details{
-  margin-top: 90px;
+  margin-top: 40px;
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  position: relative;
 }
 
 #user-profile-details-name{
@@ -68,8 +72,21 @@
   font-weight: 900;
 }
 
-#user-profile-details-username, #user-profile-details-join{
+#user-profile-details-username, #user-profile-details-join, #user-profile-details-friends{
   font-size: 14px;
   font-weight: 400;
   color: gray;
+}
+
+#profile-request-button{
+  border: 0.5px solid;
+  width: 140px;
+  padding: 7px 12px;
+  border-radius: 20px;
+  position: absolute;
+  right: 20px;
+  top: -20px;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
 }

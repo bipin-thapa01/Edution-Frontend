@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import AuthenticateCard from "../authenticateCard";
 
 export default function Signup(){

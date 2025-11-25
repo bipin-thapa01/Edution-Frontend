@@ -90,7 +90,7 @@ export default function Notification({ notifications }) {
 
   const acceptRequest = async (e, index) => {
     e.currentTarget.innerHTML = 'Accepting..';
-    const res = await fetch('http://localhost:8080/api/friend-request', {
+    const res = await fetch('http://localhost:8080/api/update-request', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ export default function Notification({ notifications }) {
 
   const declineRequest = async (e, index) => {
     e.currentTarget.innerHTML = 'Declining..';
-    const res = await fetch('http://localhost:8080/api/friend-request', {
+    const res = await fetch('http://localhost:8080/api/update-request', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Ring } from 'ldrs/react';
 import Image from 'next/image';
 
 export default function Bookmark({ bookmarkData }) {
+  const router = useRouter();
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function Bookmark({ bookmarkData }) {
               <div className='bookmark-head'>
                 <Image src={item.profileUrl} alt='profile' width={100} height={100} className='bookmark-profile' />
                 <div>
-                  <div>
+                  <div onClick={()=>router.push(`/user/${item.username}`)}>
                     <div>@{item.username}</div>
                   </div>
                   <div>{item.postDesc}</div>

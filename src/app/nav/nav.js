@@ -17,8 +17,10 @@ import './nav.css';
 export default function Nav({ loginCredentials }) {
   
   const router = useRouter();
+  const [profilename, setProfilename] = useState(null);
   const [loginData, setLoginData] = useState(null);
   const [starColor, setStarColor] = useState('white');
+
   useEffect(() => {
     const url = window.location.href.split('/');
     const lastUrl = url[url.length - 1]
@@ -31,6 +33,7 @@ export default function Nav({ loginCredentials }) {
     const profile = document.getElementById('profile');
     const settings = document.getElementById('settings');
     const allOptions = document.querySelectorAll('.nav-option')
+    console.log(lastUrl, profilename)
     if (lastUrl === '') {
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
@@ -55,15 +58,23 @@ export default function Nav({ loginCredentials }) {
       })
       search.classList.add('option-selected');
     }
-  }, []);
+    else if(lastUrl === profilename){
+      allOptions.forEach(option => {
+        option.classList.remove('option-selected');
+      })
+      profile.classList.add('option-selected');
+    }
+  }, [profilename]);
 
   useEffect(() => {
     if (loginCredentials) {
       if (loginCredentials.userDTO) {
         setLoginData(loginCredentials.userDTO);
+        setProfilename(loginCredentials.userDTO.username);
       }
       else {
         setLoginData(loginCredentials.user);
+        setProfilename(loginCredentials.user.username);
       }
       if ((loginCredentials.user && loginCredentials.user.type === 'PRO') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'PRO')) {
         setStarColor('blue');
@@ -117,7 +128,7 @@ export default function Nav({ loginCredentials }) {
         <FaBookmark className="nav-option-logo" />
         <div className="nav-opt-desc">Remember</div>
       </div>
-      <div id="friend" className="nav-option">
+      <div id="friend" className="nav-option" onClick={()=>router.push('/friends')}>
         <FaUserPlus className="nav-option-logo" />
         <div className="nav-opt-desc">Friends</div>
       </div>
@@ -129,7 +140,7 @@ export default function Nav({ loginCredentials }) {
         <TbMessage className="nav-option-logo" />
         <div className="nav-opt-desc">Message</div>
       </div>
-      <div id="profile" className="nav-option">
+      <div id="profile" className="nav-option" onClick={()=>router.push(`/user/${profilename}`)}>
         <IoPerson className="nav-option-logo" />
         <div className="nav-opt-desc">Profile</div>
       </div>

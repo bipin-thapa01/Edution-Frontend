@@ -1,12 +1,13 @@
+import { useRouter } from "next/navigation";
 import { FaBookmark } from "react-icons/fa6";
 import { GrPowerCycle } from "react-icons/gr";
-import { FaStar } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { Ring } from 'ldrs/react';
 import Image from "next/image";
 import "./postContainer.css"
 
 export default function Posts({post}) {
+  const router = useRouter();
   const convertTime = (date) => {
     const prev = new Date(date);
     const now = new Date();
@@ -141,13 +142,13 @@ export default function Posts({post}) {
 
   return <div id="post-results">
     {
-      post ? post.map((item, index) => {
+      post ? post.length>0 ? post.map((item, index) => {
         return <div key={index} className="post-result-container">
-          <div className="post-result-container-heading">
+          <div className="post-result-container-heading" onClick={()=>router.push(`/user/${item.by}`)}>
             <Image src={item.profileUrl} width={100} height={100} alt="logo" className="post-owner-pfp" />
             <div>
               <div className="post-result-username-container">
-                <div className="post-result-username">@{item.by}</div>
+                <div className="post-result-username" onClick={()=>router.push(`/user/${item.by}`)}>@{item.by}</div>
                 <div className="post-result-created-at">.  {convertTime(item.createdAt)}</div>
               </div>
               <div>{item.description}</div>
@@ -171,7 +172,7 @@ export default function Posts({post}) {
             </div>
           </div>
         </div>
-      }) : <div id="post-loader">
+      }) : <div id="post-not-found">No Post Found</div> : <div id="post-loader">
         <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
       </div>
     }

@@ -77,3 +77,9 @@
 .heart{
   font-size: 18px;
 }
+
+#post-not-found{
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+}

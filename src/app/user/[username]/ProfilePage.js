@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import Posts from "@/app/post/posts";
 import { Ring } from 'ldrs/react'
 import 'ldrs/react/Ring.css'
@@ -7,6 +8,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import './profile.css';
 
 export default function ProfilePage({ profileData }) {
+  const router = useRouter();
   const [friendData, setFriendData] = useState(null);
   const [checkFriend, setCheckFriend] = useState(null);
   const [tabContent, setTabContent] = useState(<div>Loading...</div>);
@@ -121,7 +123,7 @@ export default function ProfilePage({ profileData }) {
   const displayFriendList = (friendDTOs) => {
     if (friendDTOs && friendDTOs.length > 0) {
       return friendDTOs.map((item, index) => (
-        <div className="profile-friends-container" key={index}>
+        <div className="profile-friends-container" key={index} onClick={() => router.push(`/user/${item.username}`)}>
           <div id="profile-friends-profile">
             <Image
               src={item.imgurl}
@@ -138,22 +140,22 @@ export default function ProfilePage({ profileData }) {
         </div>
       ));
     } else {
-      return <div>Empty Friend List</div>;
+      return <div id="profile-friends-empty">Empty Friend List</div>;
     }
   };
-  
+
 
   const updateTabData = (e) => {
     if (postTab.current !== undefined && friendTab.current !== undefined) {
       if (e.currentTarget.innerText === 'Posts') {
         setTabContent(<Posts post={profileData.postDTOs} />);
         postTab.current.style.setProperty('--tab-header1', 'block');
-        friendTab.current.style.setProperty('--tab-header2','none');
+        friendTab.current.style.setProperty('--tab-header2', 'none');
       }
       else {
         setTabContent(displayFriendList(profileData.friendDTOs));
         postTab.current.style.setProperty('--tab-header1', 'none');
-        friendTab.current.style.setProperty('--tab-header2','block');
+        friendTab.current.style.setProperty('--tab-header2', 'block');
       }
     }
   }
@@ -163,7 +165,9 @@ export default function ProfilePage({ profileData }) {
       friendData ?
         (<div>
           <div id="user-profile-header">
-            <FaArrowLeft />
+            <div id="profile-goback">
+              <FaArrowLeft onClick={() => router.back()} />
+            </div>
             <div id="user-profile-header-info">
               <div id="user-profile-header-name">{friendData.name}</div>
               <div id="user-profile-header-post-count">{profileData.postDTOs.length} posts</div>

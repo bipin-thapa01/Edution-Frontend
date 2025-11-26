@@ -37,7 +37,7 @@
   font-size: 20;
 }
 
-.id-container{
+.latest-id-container{
   border: 0.5px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -46,6 +46,7 @@
   border-radius: 15px;
   row-gap: 10px;
   height: 200px;
+  cursor: pointer;
 }
 
 .user-profile{
@@ -70,7 +71,7 @@
   font-size: 14px;
 }
 
-.search-friend-button{
+.latest-search-friend-button{
   background-color: var(--theme-color);
   padding: 5px 10px;
   border-radius: 5px;
@@ -140,6 +141,7 @@
   flex-wrap: wrap;
   padding: 10px 5px;
   column-gap: 10px;
+  row-gap: 10px;
   width: 100%;
 }
 

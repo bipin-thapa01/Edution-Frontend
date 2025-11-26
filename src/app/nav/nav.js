@@ -5,7 +5,6 @@ import { Ring } from 'ldrs/react'
 import 'ldrs/react/Ring.css'
 import { MdHome } from "react-icons/md";
 import { FaRegBell, FaUserPlus } from "react-icons/fa";
-import { FaStar } from "react-icons/fa6";
 import { IoMdSearch } from "react-icons/io";
 import { FaBookmark } from "react-icons/fa";
 import { MdGroups2 } from "react-icons/md";
@@ -19,7 +18,6 @@ export default function Nav({ loginCredentials }) {
   const router = useRouter();
   const [profilename, setProfilename] = useState(null);
   const [loginData, setLoginData] = useState(null);
-  const [starColor, setStarColor] = useState('white');
 
   useEffect(() => {
     const url = window.location.href.split('/');
@@ -29,11 +27,11 @@ export default function Nav({ loginCredentials }) {
     const notification = document.getElementById('notification');
     const remember = document.getElementById('remember');
     const zone = document.getElementById('zone');
+    const friends = document.getElementById('friend');
     const message = document.getElementById('message');
     const profile = document.getElementById('profile');
     const settings = document.getElementById('settings');
-    const allOptions = document.querySelectorAll('.nav-option')
-    console.log(lastUrl, profilename)
+    const allOptions = document.querySelectorAll('.nav-option');
     if (lastUrl === '') {
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
@@ -64,6 +62,12 @@ export default function Nav({ loginCredentials }) {
       })
       profile.classList.add('option-selected');
     }
+    else if(lastUrl === 'friends'){
+      allOptions.forEach(option => {
+        option.classList.remove('option-selected');
+      })
+      friends.classList.add('option-selected');
+    }
   }, [profilename]);
 
   useEffect(() => {
@@ -74,16 +78,7 @@ export default function Nav({ loginCredentials }) {
       }
       else {
         setLoginData(loginCredentials.user);
-        setProfilename(loginCredentials.user.username);
-      }
-      if ((loginCredentials.user && loginCredentials.user.type === 'PRO') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'PRO')) {
-        setStarColor('blue');
-      }
-      else if ((loginCredentials.user && loginCredentials.user.type === 'LEGEND') || (loginCredentials.userDTO && loginCredentials.userDTO.type === 'LEGEND')) {
-        setStarColor('#6614b8');
-      }
-      else {
-        setStarColor('gold')
+        setProfilename(loginCredentials.user?.username);
       }
     }
   }, [loginCredentials]);
@@ -98,9 +93,6 @@ export default function Nav({ loginCredentials }) {
         <div id="nav-user-desc">
           <div id="nav-username-container">
             <div id="nav-user-name">{loginData.name}</div>
-            {
-              loginData.type !== 'BASIC' ? <FaStar fill={`${starColor}`} /> : null
-            }
           </div>
           <div id="nav-user-username">@{loginData.username}</div>
         </div>

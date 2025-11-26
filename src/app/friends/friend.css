@@ -1,0 +1,83 @@
+#friend-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+}
+
+#friend-page-friend-requests-container {
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 5px;
+  column-gap: 5px;
+}
+
+#friend-page-friend-requests-header{
+  padding: 15px 20px;
+  height: 60px;
+  border-bottom: 0.5px solid var(--border-color);
+}
+
+#friend-page-friend-requests-header-content{
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.friend-page-friend-request{
+  flex: 0 0 33.33%;
+  height: 200px;
+  border: 0.5px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.friend-page-friend-request:hover{
+  background-color: #1e1e1f;
+}
+
+.friend-page-friend-request-image{
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+}
+
+.friend-page-friend-request-details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friend-page-friend-request-button{
+  position: absolute;
+  bottom: 20px;
+  background-color: var(--theme-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.friend-page-friend-request-button:hover{
+  background-color: #500f90;
+}
+
+#friend-page-no-friend{
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.friend-page-loader{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+}

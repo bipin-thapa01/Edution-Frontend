@@ -90,3 +90,78 @@
   overflow: hidden;
   text-align: center;
 }
+
+#user-profile-details-bio{
+  font-size: 14px;
+}
+
+#user-profile-content{
+  margin-top: 40px;
+}
+
+#user-profile-content-tabs-header{
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 0.5px solid var(--border-color);
+  padding-bottom: 5px;
+}
+
+#user-profile-content-tabs-header1, #user-profile-content-tabs-header2{
+  position: relative;
+  cursor: pointer;
+}
+
+#user-profile-content-tabs-header1::after, #user-profile-content-tabs-header2::after{
+  content: "";
+  width: 120%;
+  height: 4px;
+  background-color: var(--theme-color);
+  position: absolute;
+  bottom: -4px;
+  left: -10%;
+  border-radius: 10px;
+  display: var(--tab-header1,block);
+}
+
+#user-profile-content-tabs-header2::after{
+  display: var(--tab-header2,none);
+}
+
+#user-profile-tab-content{
+  display: flex;
+  padding: 5px;
+  flex-wrap: wrap;
+}
+
+.profile-friends-container{
+  border: 0.5px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  flex: 0 0 32.2%;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  row-gap: 10px;
+  cursor: pointer;
+}
+
+#profile-friends-profile{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-friends-details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-friends-username{
+  color: gray;
+  font-size: 14px;
+}

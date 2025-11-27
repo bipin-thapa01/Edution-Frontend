@@ -13,20 +13,19 @@
   column-gap: 5px;
 }
 
-#friend-page-friend-requests-header{
+#friend-page-friend-requests-header {
   padding: 15px 20px;
   height: 60px;
   border-bottom: 0.5px solid var(--border-color);
 }
 
-#friend-page-friend-requests-header-content{
+#friend-page-friend-requests-header-content {
   font-size: 24px;
   font-weight: 600;
 }
 
-.friend-page-friend-request{
+.friend-page-friend-request {
   flex: 0 0 33.33%;
-  height: 200px;
   border: 0.5px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -38,11 +37,11 @@
   transition: background-color 0.5s ease-in-out;
 }
 
-.friend-page-friend-request:hover{
+.friend-page-friend-request:hover {
   background-color: #1e1e1f;
 }
 
-.friend-page-friend-request-image{
+.friend-page-friend-request-image {
   width: 100px;
   height: 100px;
   overflow: hidden;
@@ -50,32 +49,52 @@
   position: relative;
 }
 
-.friend-page-friend-request-details{
+.friend-page-friend-request-details {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.friend-page-friend-request-button{
-  position: absolute;
-  bottom: 20px;
+.friend-page-friend-request-button-accept {
   background-color: var(--theme-color);
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+  text-align: center;
 }
 
-.friend-page-friend-request-button:hover{
+.friend-page-friend-request-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  row-gap: 5px;
+}
+
+.friend-page-friend-request-button-accept:hover {
   background-color: #500f90;
 }
 
-#friend-page-no-friend{
+.friend-page-friend-request-button-decline {
+  background-color: rgb(162, 3, 3);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+  text-align: center;
+}
+
+.friend-page-friend-request-button-decline:hover{
+  background-color: rgb(120, 2, 2);
+}
+
+#friend-page-no-friend {
   width: 100%;
   text-align: center;
   margin-top: 20px;
 }
 
-.friend-page-loader{
+.friend-page-loader {
   display: flex;
   width: 100%;
   justify-content: center;

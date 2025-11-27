@@ -42,7 +42,7 @@ export default function Bookmark({ bookmarkData }) {
       <div id="bookmark-container-title">Bookmarks</div>
       <div id='bookmark-post-container'>
         {
-          data ? data.map((item, index) => {
+          data ? data.length>0 ? data.map((item, index) => {
             return <div key={index} className='bookmark-post'>
               <div className='bookmark-message-container'>
                 <div className='bookmark-time'>{convertTime(item.createdAt)} .</div>
@@ -61,7 +61,7 @@ export default function Bookmark({ bookmarkData }) {
                 <Image className='bookmark-post-image' fill src={item.postUrl} alt='Post Image' />
               </div>
             </div>
-          })
+          }): <div id='bookmark-page-no-post'>No Post Bookmarked</div>
             : <div className="loader">
               <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
             </div>

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -7,6 +8,8 @@ import Image from "next/image";
 import './search.css';
 
 export default function LatestUsers({data}){
+  const router = useRouter();
+  
   return <Swiper
             slidesPerView={3}
             spaceBetween={10}

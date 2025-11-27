@@ -1,0 +1,84 @@
+#settings-container{
+  border-left: 0.5px solid var(--border-color);
+  border-right: 0.5px solid var(--border-color);
+  flex: 0 0 923px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+}
+
+#settings-container::-webkit-scrollbar{
+  display: none;
+}
+
+#settings-left-container{
+  width: 350px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border-right: 0.5px solid var(--border-color);
+  scrollbar-width: none;
+}
+
+.settings-left-container::-webkit-scrollbar{
+  display: none;
+}
+
+#settings-right-container{
+  width: calc(100% - 300px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.settings-right-container::-webkit-scrollbar{
+  display: none;
+}
+
+#settings-left-container-header, #settings-right-container-header{
+  font-size: 24px;
+  padding: 15px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+}
+
+#settings-left-container-options{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.settings-left-container-option{
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 10px;
+  transition: background-color 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.settings-left-container-option *{
+  transition: background-color 0.5s ease-in-out;
+}
+
+.settings-left-container-option:hover, .settings-left-container-option:hover *{
+  background-color: var(--border-color);
+}
+
+.selected-option, .selected-option *{
+  background-color: rgb(39, 39, 39);
+}
+
+#settings-right-container-change{
+  display: flex;
+  width: 100%;
+  padding: 5px 15px;
+  justify-content: space-between;
+}
+
+#settings-loader{
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

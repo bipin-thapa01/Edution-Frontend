@@ -68,6 +68,12 @@ export default function Nav({ loginCredentials }) {
       })
       friends.classList.add('option-selected');
     }
+    else if(lastUrl === 'settings'){
+      allOptions.forEach(option => {
+        option.classList.remove('option-selected');
+      })
+      settings.classList.add('option-selected');
+    }
   }, [profilename]);
 
   useEffect(() => {
@@ -136,7 +142,7 @@ export default function Nav({ loginCredentials }) {
         <IoPerson className="nav-option-logo" />
         <div className="nav-opt-desc">Profile</div>
       </div>
-      <div id="settings" className="nav-option">
+      <div id="settings" className="nav-option" onClick={()=>router.push('/settings')}>
         <FaGear className="nav-option-logo" />
         <div className="nav-opt-desc">Settings</div>
       </div>

@@ -1,12 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Nav from "../nav/nav";
 import Settings from "./settings";
 import './settings.css';
 
 export default function SettingsPage(){
-
+  const router = useRouter();
   const [fetchData, setFetchData] = useState(null);
 
   useEffect(()=>{
@@ -19,6 +20,9 @@ export default function SettingsPage(){
       });
       const data = await res.json();
       setFetchData(data)
+      if(data.response === 'invalid'){
+        router.push('/login')
+      }
     }
     fetchData();
   },[])

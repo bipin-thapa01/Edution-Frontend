@@ -1,0 +1,38 @@
+#messages-container{
+  border-left: 0.5px solid var(--border-color);
+  border-right: 0.5px solid var(--border-color);
+  flex: 0 0 923px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+}
+
+#messages-container::-webkit-scrollbar{
+  display: none;
+}
+
+#message-left-container{
+  width: 350px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border-right: 0.5px solid var(--border-color);
+  scrollbar-width: none;
+}
+
+.message-left-container::-webkit-scrollbar{
+  display: none;
+}
+
+#message-right-container{
+  width: calc(100% - 350px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.message-right-container::-webkit-scrollbar{
+  display: none;
+}

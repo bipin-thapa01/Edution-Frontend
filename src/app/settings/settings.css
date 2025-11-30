@@ -130,5 +130,6 @@
   border-radius: 10px;
   position: absolute;
   right: 20px;
-  top: 170px;
+  bottom: 20px;
+  border: none;
 }

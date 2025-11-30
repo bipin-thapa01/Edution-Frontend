@@ -68,6 +68,12 @@ export default function Nav({ loginCredentials }) {
       })
       friends.classList.add('option-selected');
     }
+    else if(lastUrl === 'messages'){
+      allOptions.forEach(option => {
+        option.classList.remove('option-selected');
+      })
+      message.classList.add('option-selected');
+    }
     else if(lastUrl === 'settings'){
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
@@ -134,7 +140,7 @@ export default function Nav({ loginCredentials }) {
         <MdGroups2 className="nav-option-logo" />
         <div className="nav-opt-desc">Zone</div>
       </div>
-      <div id="message" className="nav-option">
+      <div id="message" className="nav-option" onClick={()=>router.push('/messages')}>
         <TbMessage className="nav-option-logo" />
         <div className="nav-opt-desc">Message</div>
       </div>

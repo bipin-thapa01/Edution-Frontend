@@ -71,7 +71,7 @@ export default function Settings({ fetchData }) {
         }
         else{
           setShow(true);
-          setShowMessage("Updated unsuccessful!");
+          setShowMessage("Update unsuccessful!");
         }
       }
       else {

@@ -36,3 +36,125 @@
 .message-right-container::-webkit-scrollbar{
   display: none;
 }
+
+#message-left-container-header, #message-right-container-header{
+  font-size: 24px;
+  padding: 15px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+}
+
+#message-left-container-options{
+  display: flex;
+  flex-direction: column;
+}
+
+.message-left-container-option{
+  display: flex;
+  padding: 15px 10px;
+  transition: background-color 0.5s ease-in-out;
+  cursor: pointer;
+  column-gap: 10px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.message-left-container-option-image{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.message-left-container-option-details{
+  display: flex;
+  align-items: start;
+  column-gap: 2px;
+}
+
+.message-left-container-option-username{
+  font-size: 12px;
+}
+
+#message-right-container-description{
+  width: 100%;
+  border-bottom: 2px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0px 40px 0px;
+  row-gap: 10px;
+  cursor: pointer;
+}
+
+#message-right-container-description-image{
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#message-right-container-description-description{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3px;
+}
+
+#message-right-container-description-description-username{
+  color: gray;
+}
+
+#message-right-container-empty-message{
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+  color: gray;
+}
+
+#message-right-container-input-container{
+  position: absolute;
+  bottom: 0px;
+  border-top: 2px solid var(--border-color);
+  padding: 8px 5px;
+  width: 100%;
+}
+
+#message-right-container-input-container-container{
+  width: 100%;
+  background-color: var(--border-color);
+  height: fit-content;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+  justify-content: space-between;
+}
+
+#message-right-container-input-container-container *{
+  background-color: var(--border-color);
+}
+
+#message-right-container-input{
+  outline: none;
+  border: none;
+  width: 94%;
+  padding: 5px 5px;
+  min-height: 20px; 
+  max-height: 200px; 
+  overflow-y: auto; 
+  resize: none;
+  scrollbar-width: none;
+}
+
+#messages-right-container-input::-webkit-scrollbar{
+  display: none;
+}
+
+#message-right-container-submit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

@@ -6,29 +6,31 @@ import Nav from "../nav/nav";
 import Message from "./message";
 import './messages.css';
 
-export default function MessagePage(){
+export default function MessagePage() {
   const router = useRouter();
   const [fetchData, setFetchData] = useState(null);
 
-  useEffect(()=>{
-    const fetchData = async () =>{
-      const res = await fetch('http://localhost:8080/api/settings',{
+  useEffect(() => {
+    let fetchUserData = async () => {
+      const res = await fetch("http://localhost:8080/api/message-fetch", {
         method: 'GET',
         headers: {
-          authentication: `${localStorage.getItem("token")}`,
+          authentication: `${localStorage.getItem('token')}`
         }
       });
       const data = await res.json();
-      setFetchData(data)
-      if(data.response === 'invalid'){
+      if (data.response === 'invalid') {
         router.push('/login')
       }
+
+      console.log(data)
+      setFetchData(data);
     }
-    fetchData();
-  },[])
+    fetchUserData();
+  }, [])
 
   return <div id="messages-page">
-    <Nav loginCredentials={fetchData}/>
-    <Message />
+    <Nav loginCredentials={fetchData} />
+    <Message fetchData={fetchData} />
   </div>
 }

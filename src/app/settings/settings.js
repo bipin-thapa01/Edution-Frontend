@@ -3,11 +3,14 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import PostImage from "../postImage/postImage";
 import { Ring } from "ldrs/react";
 import "ldrs/react/Ring.css";
+import Toast from "../toast/Toast";
 
 export default function Settings({ fetchData }) {
   const textData = useRef();
   const textAreaData = useRef();
   const password = useRef();
+  const [show, setShow] = useState(false); //for toast
+  const [showMessage, setShowMessage] = useState(false);
   const type = ['name', 'username', 'pfp', 'bio', 'bg'];
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [inputPlaceholder, setInputPlaceholder] = useState("Loading....");
@@ -62,7 +65,14 @@ export default function Settings({ fetchData }) {
           })
         });
         const data = await res.json();
-        console.log(data);
+        if(data.response === 'valid'){
+          setShow(true);
+          setShowMessage("Updated successfully!");
+        }
+        else{
+          setShow(true);
+          setShowMessage("Updated unsuccessful!");
+        }
       }
       else {
         const formData = new FormData();
@@ -86,6 +96,15 @@ export default function Settings({ fetchData }) {
             password: passwordData,
           })
         });
+        const data = await res.json();
+        if(data.response === 'valid'){
+          setShow(true);
+          setShowMessage("Updated successfully!");
+        }
+        else{
+          setShow(true);
+          setShowMessage("Updated unsuccessful!");
+        }
       }
     }
 
@@ -131,6 +150,7 @@ export default function Settings({ fetchData }) {
         )}
 
         <button id="settings-page-server-update-button" onClick={updateData}>Update</button>
+        <Toast message={showMessage} show={show} onClose={()=>setShow(false)}/>
       </>
     );
   };

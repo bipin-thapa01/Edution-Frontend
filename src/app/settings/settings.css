@@ -30,6 +30,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
   scrollbar-width: none;
+  position: relative;
 }
 
 .settings-right-container::-webkit-scrollbar{
@@ -124,6 +125,10 @@
 }
 
 #settings-page-server-update-button{
-  padding: 5px 10px;
+  padding: 8px 15px;
   background-color: var(--theme-color);
+  border-radius: 10px;
+  position: absolute;
+  right: 20px;
+  top: 170px;
 }

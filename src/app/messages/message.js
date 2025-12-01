@@ -12,6 +12,8 @@ export default function Message({ fetchData }) {
   const [friends, setFriends] = useState(null);
   const [message, setMessage] = useState(null);
   const [currentFriend, setCurrentFriend] = useState(null);
+  const intervalIds = useRef([]);
+
 
   useEffect(() => {
     if (fetchData) {
@@ -20,6 +22,9 @@ export default function Message({ fetchData }) {
   }, [fetchData]);
 
   const displayRightContainer = async (item, index) => {
+    intervalIds.current.forEach(id => clearInterval(id));
+    intervalIds.current = []; // reset list
+
     const { data, error } = await supabase
       .from("message")
       .select("*")
@@ -34,6 +39,24 @@ export default function Message({ fetchData }) {
 
     setCurrentFriend(item);
     setMessage(data);
+
+    const id = setInterval(async () => {
+      const { data, error } = await supabase
+        .from("message")
+        .select("*")
+        .or(`and(to.eq.${fetchData?.user?.username},by.eq.${item?.username}),and(to.eq.${item?.username},by.eq.${fetchData?.user?.username})`);
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      console.log(data)
+
+      setCurrentFriend(item);
+      setMessage(data);
+    }, [1000]);
+    intervalIds.current.push(id);
   }
 
   const convertTime = (date) => {
@@ -49,6 +72,35 @@ export default function Message({ fetchData }) {
     e.target.style.height = "auto";
     e.target.style.height = e.target.scrollHeight + "px";
   };
+
+  const uploadMessage = async () => {
+    if (textareaRef.current !== undefined) {
+      const newMessage = textareaRef.current.value;
+      if (newMessage !== '') {
+        const now = new Date();
+        const updatedMessage = {
+          id: message[message.length - 1].id + 1,
+          content: newMessage,
+          by: fetchData?.user?.username,
+          to: currentFriend?.username,
+          created_at: now
+        }
+        setMessage([...message, updatedMessage]);
+        const { data, error } = await supabase.from("message").insert(updatedMessage);
+        if (error) {
+          console.error(error);
+          return;
+        }
+        textareaRef.current.value = '';
+      }
+    }
+  }
+
+  const handleEnter = (e) =>{
+    if(e.key === 'Enter'){
+      uploadMessage();
+    }
+  }
 
   const displayMessages = (message, currentFriend) => {
     return <>
@@ -78,8 +130,8 @@ export default function Message({ fetchData }) {
       </div>
       <div id="message-right-container-input-container">
         <div id="message-right-container-input-container-container">
-          <textarea ref={textareaRef} id="message-right-container-input" placeholder="Enter your message" autoComplete="off" onInput={handleInput} />
-          <div id="message-right-container-submit">
+          <textarea onKeyDown={handleEnter} ref={textareaRef} id="message-right-container-input" placeholder="Enter your message" autoComplete="off" onInput={handleInput} />
+          <div id="message-right-container-submit" onClick={uploadMessage}>
             <FaLocationArrow fill="#6614b8" />
           </div>
         </div>

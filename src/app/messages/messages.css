@@ -44,6 +44,11 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+#message-right-container-header{
+  position: sticky;
+  top: 0;
+}
+
 #message-left-container-options{
   display: flex;
   flex-direction: column;
@@ -129,7 +134,7 @@
 
 .right{
   background-color: var(--border-color);
-  align-items: flex-end;
+  align-self: flex-end;
 }
 
 #message-right-container-empty-message{
@@ -140,8 +145,8 @@
 }
 
 #message-right-container-input-container{
-  position: absolute;
-  bottom: 0px;
+  position: sticky;
+  bottom: 0;
   border-top: 2px solid var(--border-color);
   padding: 8px 5px;
   width: 100%;

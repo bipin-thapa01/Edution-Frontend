@@ -106,6 +106,32 @@
   color: gray;
 }
 
+#message-right-container-message-container{
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.message-right-container-message{
+  width: fit-content;
+  padding: 8px 10px;
+  border-radius: 20px;
+}
+
+.left{
+  background-color: var(--theme-color);
+  align-self: flex-start;
+}
+
+.right{
+  background-color: var(--border-color);
+  align-items: flex-end;
+}
+
 #message-right-container-empty-message{
   width: 100%;
   margin-top: 20px;

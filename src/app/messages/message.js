@@ -65,13 +65,17 @@ export default function Message({ fetchData }) {
           <div>Joined on {convertTime(currentFriend.date)}</div>
         </div>
       </div>
-      {
-        message && message.length > 0 ?
-          message.map((item, index) => {
-
-          })
-          : <div id="message-right-container-empty-message">Empty message history.<br></br>Say Hi👋</div>
-      }
+      <div id="message-right-container-message-container">
+        {
+          message && message.length > 0 ?
+            message.map((item, index) => {
+              return <div className={`message-right-container-message ${item.by === currentFriend?.username ? "left" : "right"}`} id={`message-right-container-message${index}`} key={index}>
+                {item.content}
+              </div>
+            })
+            : <div id="message-right-container-empty-message">Empty message history.<br></br>Say Hi👋</div>
+        }
+      </div>
       <div id="message-right-container-input-container">
         <div id="message-right-container-input-container-container">
           <textarea ref={textareaRef} id="message-right-container-input" placeholder="Enter your message" autoComplete="off" onInput={handleInput} />

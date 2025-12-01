@@ -131,6 +131,8 @@
   display: flex;
   padding: 5px;
   flex-wrap: wrap;
+  row-gap: 5px;
+  column-gap: 5px;
 }
 
 .profile-friends-container{

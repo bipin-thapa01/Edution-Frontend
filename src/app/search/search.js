@@ -4,9 +4,11 @@ import Posts from "../post/posts";
 import { FaSearch } from "react-icons/fa";
 import LatestUsers from "./LatestUsers";
 import Image from "next/image";
+import { Ring } from 'ldrs/react';
 
 export default function Search({ fetchData }) {
   const router = useRouter();
+  const [searchStatus, setSearchStatus] = useState(<div>Search</div>);
   const [data, setData] = useState(null);
   const [searchType, setSearchType] = useState('user');
   const [searchContent, setSearchContent] = useState(null);
@@ -17,9 +19,11 @@ export default function Search({ fetchData }) {
   }, [fetchData]);
 
   const searchKey = async (e) => {
+    setSearchStatus(<Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />);
     let key = e.currentTarget.value;
-    if (key === '') {
+    if (key.length === 0) {
       setSearchContent(null);
+      setSearchStatus(<div>Search</div>);
       return;
     }
     let res = await fetch("http://localhost:8080/api/search", {
@@ -31,7 +35,6 @@ export default function Search({ fetchData }) {
     });
     let data = await res.json();
     setSearchContent(data);
-    console.log(data)
   }
 
   const changeSearchResultType = (e) => {
@@ -94,9 +97,8 @@ export default function Search({ fetchData }) {
                 )
               )
             ) : (
-              <div id="search-result-default">Search</div>
+              <div id="search-result-default">{searchStatus}</div>
             )
-
           }
         </div>
       </div>

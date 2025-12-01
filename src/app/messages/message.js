@@ -9,6 +9,8 @@ import { FaLocationArrow } from "react-icons/fa";
 export default function Message({ fetchData }) {
   const router = useRouter();
   const textareaRef = useRef();
+  const bottomRef = useRef();
+  const latestMessageRef = useRef(null);
   const [friends, setFriends] = useState(null);
   const [message, setMessage] = useState(null);
   const [currentFriend, setCurrentFriend] = useState(null);
@@ -21,10 +23,16 @@ export default function Message({ fetchData }) {
     }
   }, [fetchData]);
 
-  const displayRightContainer = async (item, index) => {
-    intervalIds.current.forEach(id => clearInterval(id));
-    intervalIds.current = []; // reset list
+  useEffect(() => {
+    latestMessageRef.current = message;
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [message])
 
+  const displayRightContainer = async (item, index, e) => {
+    intervalIds.current.forEach(id => clearInterval(id));
+    intervalIds.current = [];
+    document.querySelectorAll('.message-left-container-option').forEach(option => option.classList.remove('message-left-container-option-selected'));
+    e.currentTarget?.classList.add('message-left-container-option-selected');
     const { data, error } = await supabase
       .from("message")
       .select("*")
@@ -35,10 +43,11 @@ export default function Message({ fetchData }) {
       return;
     }
 
-    console.log(data)
-
     setCurrentFriend(item);
-    setMessage(data);
+    if (JSON.stringify(data) !== JSON.stringify(message)) {
+      setMessage(data);
+    }
+
 
     const id = setInterval(async () => {
       const { data, error } = await supabase
@@ -51,10 +60,12 @@ export default function Message({ fetchData }) {
         return;
       }
 
-      console.log(data)
-
       setCurrentFriend(item);
-      setMessage(data);
+      console.log(data)
+      if (JSON.stringify(data) !== JSON.stringify(latestMessageRef.current)) {
+        setMessage(data);
+      }
+
     }, [1000]);
     intervalIds.current.push(id);
   }
@@ -96,37 +107,42 @@ export default function Message({ fetchData }) {
     }
   }
 
-  const handleEnter = (e) =>{
-    if(e.key === 'Enter'){
+  const handleEnter = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
       uploadMessage();
     }
-  }
+  };
+
 
   const displayMessages = (message, currentFriend) => {
     return <>
       <div id="message-right-container-header">
         {currentFriend.name}
       </div>
-      <div onClick={() => router.push(`/user/${currentFriend.username}`)} id="message-right-container-description">
-        <div id="message-right-container-description-image">
-          <Image alt="image" src={currentFriend.imgurl} fill style={{ objectFit: 'fit' }} />
+      <div id="message-right-container-body">
+        <div onClick={() => router.push(`/user/${currentFriend.username}`)} id="message-right-container-description">
+          <div id="message-right-container-description-image">
+            <Image alt="image" src={currentFriend.imgurl} fill style={{ objectFit: 'fit' }} />
+          </div>
+          <div id="message-right-container-description-description">
+            <div>{currentFriend.name}</div>
+            <div id="message-right-container-description-description-username">@{currentFriend.username}</div>
+            <div>Joined on {convertTime(currentFriend.date)}</div>
+          </div>
         </div>
-        <div id="message-right-container-description-description">
-          <div>{currentFriend.name}</div>
-          <div id="message-right-container-description-description-username">@{currentFriend.username}</div>
-          <div>Joined on {convertTime(currentFriend.date)}</div>
+        <div id="message-right-container-message-container">
+          {
+            message && message.length > 0 ?
+              message.map((item, index) => {
+                return <div className={`message-right-container-message ${item.by === currentFriend?.username ? "left" : "right"}`} id={`message-right-container-message${index}`} key={index}>
+                  {item.content}
+                </div>
+              })
+              : <div id="message-right-container-empty-message">Empty message history.<br></br>Say Hi👋</div>
+          }
         </div>
-      </div>
-      <div id="message-right-container-message-container">
-        {
-          message && message.length > 0 ?
-            message.map((item, index) => {
-              return <div className={`message-right-container-message ${item.by === currentFriend?.username ? "left" : "right"}`} id={`message-right-container-message${index}`} key={index}>
-                {item.content}
-              </div>
-            })
-            : <div id="message-right-container-empty-message">Empty message history.<br></br>Say Hi👋</div>
-        }
+        <div id="message-right-container-bottom-spacer"></div>
       </div>
       <div id="message-right-container-input-container">
         <div id="message-right-container-input-container-container">
@@ -136,6 +152,7 @@ export default function Message({ fetchData }) {
           </div>
         </div>
       </div>
+      <div ref={bottomRef}></div>
     </>
   }
 
@@ -145,7 +162,7 @@ export default function Message({ fetchData }) {
       <div id="message-left-container-options">
         {
           friends ? friends.map((item, index) => {
-            return <div className="message-left-container-option" key={index} onClick={() => displayRightContainer(item, index)}>
+            return <div className="message-left-container-option" key={index} onClick={(e) => displayRightContainer(item, index, e)}>
               <div className="message-left-container-option-image">
                 <Image alt="image" src={item.imgurl} fill unoptimized style={{ objectFit: 'fit' }} />
               </div>

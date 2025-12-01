@@ -14,7 +14,7 @@ import { FaGear } from "react-icons/fa6";
 import './nav.css';
 
 export default function Nav({ loginCredentials }) {
-  
+
   const router = useRouter();
   const [profilename, setProfilename] = useState(null);
   const [loginData, setLoginData] = useState(null);
@@ -26,7 +26,6 @@ export default function Nav({ loginCredentials }) {
     const search = document.getElementById('search');
     const notification = document.getElementById('notification');
     const remember = document.getElementById('remember');
-    const zone = document.getElementById('zone');
     const friends = document.getElementById('friend');
     const message = document.getElementById('message');
     const profile = document.getElementById('profile');
@@ -50,31 +49,31 @@ export default function Nav({ loginCredentials }) {
       })
       remember.classList.add('option-selected');
     }
-    else if (lastUrl === 'search'){
+    else if (lastUrl === 'search') {
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
       })
       search.classList.add('option-selected');
     }
-    else if(lastUrl === profilename){
+    else if (lastUrl === profilename) {
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
       })
       profile.classList.add('option-selected');
     }
-    else if(lastUrl === 'friends'){
+    else if (lastUrl === 'friends') {
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
       })
       friends.classList.add('option-selected');
     }
-    else if(lastUrl === 'messages'){
+    else if (lastUrl === 'messages') {
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
       })
       message.classList.add('option-selected');
     }
-    else if(lastUrl === 'settings'){
+    else if (lastUrl === 'settings') {
       allOptions.forEach(option => {
         option.classList.remove('option-selected');
       })
@@ -120,7 +119,7 @@ export default function Nav({ loginCredentials }) {
         <MdHome className="nav-option-logo" />
         <div className="nav-opt-desc">Homepage</div>
       </div>
-      <div id="search" className="nav-option" onClick={()=>router.push('/search')}>
+      <div id="search" className="nav-option" onClick={() => router.push('/search')}>
         <IoMdSearch className="nav-option-logo" />
         <div className="nav-opt-desc">Search</div>
       </div>
@@ -132,23 +131,19 @@ export default function Nav({ loginCredentials }) {
         <FaBookmark className="nav-option-logo" />
         <div className="nav-opt-desc">Remember</div>
       </div>
-      <div id="friend" className="nav-option" onClick={()=>router.push('/friends')}>
+      <div id="friend" className="nav-option" onClick={() => router.push('/friends')}>
         <FaUserPlus className="nav-option-logo" />
         <div className="nav-opt-desc">Friends</div>
       </div>
-      <div id="zone" className="nav-option">
-        <MdGroups2 className="nav-option-logo" />
-        <div className="nav-opt-desc">Zone</div>
-      </div>
-      <div id="message" className="nav-option" onClick={()=>router.push('/messages')}>
+      <div id="message" className="nav-option" onClick={() => router.push('/messages')}>
         <TbMessage className="nav-option-logo" />
         <div className="nav-opt-desc">Message</div>
       </div>
-      <div id="profile" className="nav-option" onClick={()=>router.push(`/user/${profilename}`)}>
+      <div id="profile" className="nav-option" onClick={() => router.push(`/user/${profilename}`)}>
         <IoPerson className="nav-option-logo" />
         <div className="nav-opt-desc">Profile</div>
       </div>
-      <div id="settings" className="nav-option" onClick={()=>router.push('/settings')}>
+      <div id="settings" className="nav-option" onClick={() => router.push('/settings')}>
         <FaGear className="nav-option-logo" />
         <div className="nav-opt-desc">Settings</div>
       </div>

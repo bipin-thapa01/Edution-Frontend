@@ -3,7 +3,6 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Nav from "../nav/nav";
 import Search from "./search";
-import RightContainer from "../right/rightContainer";
 import "./search.css";
 
 export default function SearchPage(){
@@ -32,7 +31,6 @@ export default function SearchPage(){
     <div id="search-page">
       <Nav loginCredentials={fetchData}/>
       <Search fetchData={fetchData}/>
-      <RightContainer />
     </div>
   );
 }

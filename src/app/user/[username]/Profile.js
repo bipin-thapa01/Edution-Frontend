@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ProfilePage from "./ProfilePage";
 import Nav from "@/app/nav/nav";
-import RightContainer from "@/app/right/rightContainer";
 import LowerNav from "@/app/lowerNav/lowerNav";
 import './profile.css';
 
@@ -45,7 +44,6 @@ export default function Profile({ username }) {
   return <div id="user-profile">
     <Nav loginCredentials={profileData} />
     <ProfilePage profileData={profileData}/>
-    <RightContainer loginCredentials={userDTO} />
     <LowerNav />
   </div>
 }

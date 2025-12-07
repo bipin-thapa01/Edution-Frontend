@@ -4,11 +4,14 @@ import PostImage from "../postImage/postImage";
 import { Ring } from "ldrs/react";
 import "ldrs/react/Ring.css";
 import Toast from "../toast/Toast";
+import { FaArrowLeft } from "react-icons/fa";
 
 export default function Settings({ fetchData }) {
   const textData = useRef();
   const textAreaData = useRef();
   const password = useRef();
+  const leftContainer = useRef();
+  const rightContainer = useRef();
   const [show, setShow] = useState(false); //for toast
   const [showMessage, setShowMessage] = useState(false);
   const type = ['name', 'username', 'pfp', 'bio', 'bg'];
@@ -107,10 +110,19 @@ export default function Settings({ fetchData }) {
         }
       }
     }
+    
+    const goBack = () =>{
+      if(leftContainer.current !== undefined && rightContainer.current !== undefined){
+        leftContainer.current.style.display = 'block';
+        rightContainer.current.style.display = 'none';
+      }
+    }
 
     return (
       <>
-        <div id="settings-right-container-header">{item.title}</div>
+        <div id="settings-right-container-header">
+          <div id="settings-go-back" onClick={goBack}><FaArrowLeft /></div>
+          {item.title}</div>
 
         <div id="settings-right-container-change">
           <div>{item.description}</div>
@@ -155,20 +167,27 @@ export default function Settings({ fetchData }) {
     );
   };
 
+  const displayRightContainer = () =>{
+    if(leftContainer.current !== undefined && rightContainer.current !== undefined){
+      leftContainer.current.style.display = 'none';
+      rightContainer.current.style.display = 'block';
+    }
+  }
+
   return (
     <div id="settings-container">
-      <div id="settings-left-container">
+      <div id="settings-left-container" ref={leftContainer}>
         <div id="settings-left-container-header">Settings</div>
 
         <div id="settings-left-container-options">
           {data.map((item, index) => (
             <div
               key={index}
-              className={`settings-left-container-option ${selectedIndex === index ? "selected-option" : ""
-                }`}
+              className={`settings-left-container-option`}
               onClick={() => {
                 setSelectedIndex(index);
                 setImageList([]);
+                displayRightContainer();
               }}
             >
               <div>{item.title}</div>
@@ -180,7 +199,7 @@ export default function Settings({ fetchData }) {
         </div>
       </div>
 
-      <div id="settings-right-container">{renderRightContent()}</div>
+      <div id="settings-right-container" ref={rightContainer}>{renderRightContent()}</div>
     </div>
   );
 }

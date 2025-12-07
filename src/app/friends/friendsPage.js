@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Nav from "../nav/nav";
 import Friend from "./friend";
 import LowerNav from "../lowerNav/lowerNav";
-import RightContainer from "../right/rightContainer";
 import './friend.css';
 
 export default function FriendsPage() {
@@ -36,6 +35,5 @@ export default function FriendsPage() {
   return <div id="user-friend-page">
     <Nav loginCredentials={fetchData} />
     <Friend fetchData={fetchData}/>
-    <RightContainer fetchData={fetchData}/>
   </div>
 }

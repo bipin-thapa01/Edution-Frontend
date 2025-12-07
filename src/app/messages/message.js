@@ -5,11 +5,14 @@ import Image from "next/image";
 import { Ring } from "ldrs/react";
 import "ldrs/react/Ring.css";
 import { FaLocationArrow } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
 export default function Message({ fetchData }) {
   const router = useRouter();
   const textareaRef = useRef();
   const bottomRef = useRef();
+  const leftContainer = useRef();
+  const rightContainer = useRef();
   const latestMessageRef = useRef(null);
   const [friends, setFriends] = useState(null);
   const [message, setMessage] = useState(null);
@@ -29,10 +32,12 @@ export default function Message({ fetchData }) {
   }, [message])
 
   const displayRightContainer = async (item, index, e) => {
+    if(leftContainer.current !== undefined && rightContainer.current !== undefined){
+      leftContainer.current.style.display = 'none';
+      rightContainer.current.style.display = 'flex';
+    }
     intervalIds.current.forEach(id => clearInterval(id));
     intervalIds.current = [];
-    document.querySelectorAll('.message-left-container-option').forEach(option => option.classList.remove('message-left-container-option-selected'));
-    e.currentTarget?.classList.add('message-left-container-option-selected');
     const { data, error } = await supabase
       .from("message")
       .select("*")
@@ -61,7 +66,6 @@ export default function Message({ fetchData }) {
       }
 
       setCurrentFriend(item);
-      console.log(data)
       if (JSON.stringify(data) !== JSON.stringify(latestMessageRef.current)) {
         setMessage(data);
       }
@@ -114,11 +118,19 @@ export default function Message({ fetchData }) {
     }
   };
 
+  const goBack = () =>{
+    if(leftContainer.current !== undefined && rightContainer.current !== undefined){
+      leftContainer.current.style.display = 'block';
+      rightContainer.current.style.display = 'none';
+    }
+  }
+
 
   const displayMessages = (message, currentFriend) => {
     return <>
       <div id="message-right-container-header">
-        {currentFriend.name}
+      <div id="message-right-container-go-back">
+      <FaArrowLeft onClick={goBack}/></div> {currentFriend.name}
       </div>
       <div id="message-right-container-body">
         <div onClick={() => router.push(`/user/${currentFriend.username}`)} id="message-right-container-description">
@@ -142,6 +154,7 @@ export default function Message({ fetchData }) {
               : <div id="message-right-container-empty-message">Empty message history.<br></br>Say Hi👋</div>
           }
         </div>
+        <div ref={bottomRef}></div>
         <div id="message-right-container-bottom-spacer"></div>
       </div>
       <div id="message-right-container-input-container">
@@ -152,12 +165,11 @@ export default function Message({ fetchData }) {
           </div>
         </div>
       </div>
-      <div ref={bottomRef}></div>
     </>
   }
 
   return <div id="messages-container">
-    <div id="message-left-container">
+    <div id="message-left-container" ref={leftContainer}>
       <div id="message-left-container-header">Message</div>
       <div id="message-left-container-options">
         {
@@ -181,7 +193,7 @@ export default function Message({ fetchData }) {
         }
       </div>
     </div>
-    <div id="message-right-container">
+    <div id="message-right-container" ref={rightContainer}>
       {
         message ? displayMessages(message, currentFriend) : <div>
           <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />

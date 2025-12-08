@@ -1,9 +1,14 @@
 "use client";
 
 import { useState, useEffect} from "react";
+import { useRouter } from "next/navigation";
 import AuthenticateCard from "../authenticateCard";
+import TopRightPopup from "../topRightPopup/topRightPopup";
 
 export default function Signup(){
+  const [show, setShow] = useState(true);
+  const [popupMessage, setPopupMessage] = useState(null);
+  const router = useRouter();
 
   const signupData = {
     type: "signup",
@@ -30,12 +35,25 @@ export default function Signup(){
       body: JSON.stringify({name: name,username: username, email: email, password: password, code: roomCode})
     });
     const data = await res.json();
-    console.log(data);
+    console.log(data)
+    setPopupMessage(data.response);
+    setShow(true);
+    if(data.status === 'done'){
+      router.push("/login");
+    }
   }
 
   return (
     <div>
       <AuthenticateCard data={signupData} submitForm={submitForm}/>
+      {
+        popupMessage ? <TopRightPopup
+        message={popupMessage}
+        duration={10000}
+        show={show}
+        onClose={() => setShow(false)}
+      /> : null
+      }
     </div>
   );
 }

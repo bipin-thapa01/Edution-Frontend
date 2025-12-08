@@ -94,13 +94,20 @@ export default function Nav({ loginCredentials }) {
     }
   }, [loginCredentials]);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    router.push('/login');
+  }
+
   return <div id="nav">
     <div id="nav-logo">
       Socialz
     </div>
     {
       loginData ? <div id="nav-user-info">
-        <Image id="nav-user-image" src={loginData.imgurl} width={100} height={100} alt="user-logo" />
+        <div id="nav-user-image">
+          <Image src={loginData.imgurl} fill alt="user-logo" style={{objectFit: 'cover'}}/>
+        </div>
         <div id="nav-user-desc">
           <div id="nav-username-container">
             <div id="nav-user-name">{loginData.name}</div>
@@ -146,6 +153,11 @@ export default function Nav({ loginCredentials }) {
       <div id="settings" className="nav-option" onClick={() => router.push('/settings')}>
         <FaGear className="nav-option-logo" />
         <div className="nav-opt-desc">Settings</div>
+      </div>
+    </div>
+    <div id="nav-log-out-button" onClick={logout}>
+      <div>
+        Log Out
       </div>
     </div>
   </div>

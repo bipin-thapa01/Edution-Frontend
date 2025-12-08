@@ -46,6 +46,7 @@ export default function Friend({ fetchData }) {
         body: JSON.stringify({
           username: `${fetchData?.friends[index].username}`,
           friendUsername: `${fetchData?.user.username}`,
+          source: 'declined'
         })
       });
       const data = await res.json();

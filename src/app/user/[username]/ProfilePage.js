@@ -79,7 +79,8 @@ export default function ProfilePage({ profileData }) {
         },
         body: JSON.stringify({
           username: `${profileData.userDTO.username}`,
-          friendUsername: `${profileData.friendDTO.username}`
+          friendUsername: `${profileData.friendDTO.username}`,
+          source: text.toLowerCase()
         })
       });
       const data = await res.json();
@@ -181,7 +182,7 @@ export default function ProfilePage({ profileData }) {
           </div>
           <div id="user-profile-details">
             {
-              profileData.isFriend ?
+              profileData.isFriend && profileData.username !== 'admin' ?
                 <div id="profile-request-button" ref={friendButton} onMouseEnter={mouseEnterAction} onMouseLeave={mouseLeaveAction} onClick={clickAction}>{checkFriend ? checkFriend : "Loading..."}</div>
                 : null
             }

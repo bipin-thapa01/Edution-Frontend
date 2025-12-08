@@ -159,6 +159,18 @@
   cursor: pointer;
 }
 
+.swiper-container-wrapper {
+  position: relative;
+  padding-bottom: 40px; /* extra space for pagination */
+}
+
+.mySwiper .swiper-pagination {
+  bottom: 10px !important; /* adjust distance from bottom */
+  position: absolute;
+}
+
+
+
 .search-result-post{
   flex: 0 0 95%;
   overflow: hidden;

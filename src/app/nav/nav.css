@@ -43,6 +43,8 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  overflow: hidden;
+  position: relative;
 }
 
 #nav-user-desc{
@@ -95,6 +97,24 @@
   font-size: 26px;
 }
 
+#nav-log-out-button{
+  width: 80%;
+  height: 40px !important;
+  border-radius: 30px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#nav-log-out-button *{
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
 @media (max-width: 1240px){
   #nav{
     flex: 0 0 70px;
@@ -139,6 +159,10 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+  }
+
+  #nav-log-out-button{
+    width: 100%;
   }
 }
 

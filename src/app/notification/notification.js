@@ -15,6 +15,7 @@ export default function Notification({ notifications }) {
   useEffect(() => {
     if (notifications) {
       setDisplayNotifications(notifications.notifications);
+      console.log(notifications.notifications)
     }
   }, [notifications]);
 
@@ -72,7 +73,7 @@ export default function Notification({ notifications }) {
     posts.current.style.setProperty('--after-post', 'block');
     friend.current.style.setProperty('--after-friend', 'none');
     setDisplayNotifications(notifications.notifications.filter((item, index) => {
-      return item.type === 'post';
+      return item.requestType === 'post';
     }))
   }
 
@@ -84,7 +85,7 @@ export default function Notification({ notifications }) {
     posts.current.style.setProperty('--after-post', 'none');
     friend.current.style.setProperty('--after-friend', 'block');
     setDisplayNotifications(notifications.notifications.filter((item, index) => {
-      return item.type === 'friend request';
+      return item.requestType === 'friend request';
     }))
   }
 
@@ -151,14 +152,6 @@ export default function Notification({ notifications }) {
                   <div className='notification-star'>
                     {item.type !== 'BASIC' ? <FaStar fill={item.type === 'PRO' ? 'blue' : item.type === 'LEGEND' ? '#6614b8' : 'gold'} /> 
                     : null}</div></div>
-                {
-                  item.type === 'friend request' && item.status === 'pending' ? <div id={`buttons-${index}`} className='notification-request-buttons'>
-                    <button onClick={(e) => acceptRequest(e, index)} className='notification-button-accept'>Accept</button>
-                    <button onClick={(e) => declineRequest(e, index)} className='notification-button-decline'>Decline</button>
-                  </div> : null
-                }
-                <div className='notification-friend-request-status' id={`request-accepted-${index}`}>Accepted</div>
-                <div className='notification-friend-request-status' id={`request-declined-${index}`}>Declined</div>
               </div>
               <div className='notification-time'>{convertTime(item.date)}</div>
             </div>

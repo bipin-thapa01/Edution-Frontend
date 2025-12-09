@@ -36,6 +36,8 @@ export default function Home({ loginCredentials }) {
       return;
     }
 
+    document.getElementById('post-button').innerText = 'Submitting...';
+
     let imageData = null;
 
     if (imageList.length > 0) {
@@ -69,6 +71,21 @@ export default function Home({ loginCredentials }) {
     setShow(true);
     setImageList([]);
     document.getElementById('post-text').value = '';
+
+    document.getElementById('post-button').innerText = 'Submitted✅';
+
+    const res2 = await fetch("http://localhost:8080/api/home", {
+      method: "GET",
+      headers: {
+        authorization: `${localStorage.getItem("token")}`,
+      },
+    });
+    const data2 = await res2.json();
+    setLoginData(data2?.user);
+
+    setTimeout(() => {
+      document.getElementById('post-button').innerText = 'Post';
+    }, [2000]);
   }
 
   const displayEmoji = () => {
@@ -107,13 +124,13 @@ export default function Home({ loginCredentials }) {
 
   return <div id="home-container" className="middle-container">
     {
-        popupMessage ? <TopRightPopup
+      popupMessage ? <TopRightPopup
         message={popupMessage}
         duration={10000}
         show={show}
         onClose={() => setShow(false)}
       /> : null
-      }
+    }
     <div id="homepage-filter">
       <div id="home-filter-discovery" onClick={filterPost}>Discover</div>
       <div id="home-filter-following" onClick={filterPost}>Following</div>

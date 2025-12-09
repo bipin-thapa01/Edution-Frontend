@@ -1,14 +1,17 @@
 'use client'
 
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Nav from "../nav/nav";
 import Message from "./message";
+import LowerNav from "../lowerNav/lowerNav";
+import Navbar from "../popupNav/Navbar";
 import './messages.css';
 
 export default function MessagePage() {
   const router = useRouter();
   const [fetchData, setFetchData] = useState(null);
+  const lowerNav = useRef();
 
   useEffect(() => {
     let fetchUserData = async () => {
@@ -31,6 +34,8 @@ export default function MessagePage() {
 
   return <div id="messages-page">
     <Nav loginCredentials={fetchData} />
-    <Message fetchData={fetchData} />
+    <Message fetchData={fetchData} lowerNav={lowerNav}/>
+    <LowerNav lowerNav={lowerNav}/>
+    <Navbar />
   </div>
 }

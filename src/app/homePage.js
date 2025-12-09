@@ -5,6 +5,7 @@ import "./homePage.css";
 import Nav from "./nav/nav";
 import Home from "./home";
 import LowerNav from "./lowerNav/lowerNav";
+import Navbar from "./popupNav/Navbar";
 
 export default function HomePage() {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function HomePage() {
       <Nav loginCredentials={fetchData} />
       <Home loginCredentials={fetchData} />
       <LowerNav />
+      <Navbar />
     </div>
   );
 }

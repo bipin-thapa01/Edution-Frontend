@@ -223,3 +223,15 @@
   justify-content: center;
   cursor: pointer;
 }
+
+@media(max-width:750px){
+  #messages-container{
+    flex: 0 0 648px;
+  }
+}
+
+@media (max-width: 730px){
+  #messages-container{
+    flex: 0 0 100vw;
+  }
+}

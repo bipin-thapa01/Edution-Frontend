@@ -4,16 +4,16 @@ import { MdHome } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import { TbMessage } from "react-icons/tb";
+import { RxHamburgerMenu } from "react-icons/rx";
 
-export default function LowerNav(){
+export default function LowerNav({lowerNav}){
   const router = useRouter();
   return (
-    <div id="lower-nav-container">
+    <div id="lower-nav-container" ref={lowerNav}>
       <MdHome className="lower-nav-option" onClick={()=>router.push('/')}/>
-      <IoMdSearch className="lower-nav-option"/>
-      <div id="lower-add-post" className="lower-nav-option">+</div>
-      <FaRegBell className="lower-nav-option"/>
-      <TbMessage className="lower-nav-option"/>
+      <IoMdSearch onClick={()=>router.push('/search')} className="lower-nav-option"/>
+      <FaRegBell onClick={()=>router.push('/notification')} className="lower-nav-option"/>
+      <TbMessage onClick={()=>router.push('/messages')} className="lower-nav-option"/>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import "ldrs/react/Ring.css";
 import { FaLocationArrow } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 
-export default function Message({ fetchData }) {
+export default function Message({ fetchData, lowerNav }) {
   const router = useRouter();
   const textareaRef = useRef();
   const bottomRef = useRef();
@@ -32,6 +32,9 @@ export default function Message({ fetchData }) {
   }, [message])
 
   const displayRightContainer = async (item, index, e) => {
+    if(lowerNav.current){
+      lowerNav.current.style.display = 'none';
+    }
     if(leftContainer.current !== undefined && rightContainer.current !== undefined){
       leftContainer.current.style.display = 'none';
       rightContainer.current.style.display = 'flex';
@@ -119,6 +122,9 @@ export default function Message({ fetchData }) {
   };
 
   const goBack = () =>{
+    if(lowerNav.current){
+      lowerNav.current.style.display = 'flex';
+    }
     if(leftContainer.current !== undefined && rightContainer.current !== undefined){
       leftContainer.current.style.display = 'block';
       rightContainer.current.style.display = 'none';

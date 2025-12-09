@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "./topRightPopup.css";
 
-export default function TopRightPopupNoDeps({
+export default function TopRightPopup({
   message = "This is a popup message",
   duration = 10000,
   show = true,

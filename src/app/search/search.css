@@ -159,17 +159,20 @@
   cursor: pointer;
 }
 
+.search-result-user:hover, .search-result-user:hover *{
+  background-color: rgb(30, 30, 30);
+}
+
 .swiper-container-wrapper {
   position: relative;
   padding-bottom: 40px; /* extra space for pagination */
 }
 
-.mySwiper .swiper-pagination {
-  bottom: 10px !important; /* adjust distance from bottom */
-  position: absolute;
+.swiper-button-next,
+.swiper-button-prev {
+  color: #6614b8;
+  background-color: transparent;
 }
-
-
 
 .search-result-post{
   flex: 0 0 95%;

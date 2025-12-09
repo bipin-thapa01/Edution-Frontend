@@ -146,7 +146,7 @@ export default function Posts({post}) {
         return <div key={index} className="post-result-container">
           <div className="post-result-container-heading" onClick={()=>router.push(`/user/${item.by}`)}>
             <Image src={item.profileUrl} width={100} height={100} alt="logo" className="post-owner-pfp" />
-            <div>
+            <div className="post-result-container-container-container">
               <div className="post-result-username-container">
                 <div className="post-result-username" onClick={()=>router.push(`/user/${item.by}`)}>@{item.by}</div>
                 <div className="post-result-created-at">.  {convertTime(item.createdAt)}</div>
@@ -155,7 +155,7 @@ export default function Posts({post}) {
             </div>
           </div>
           {
-            post.imgurl === "" || post.imgurl === null ? null : <Image className="post-result-image" src={item.imgurl} width={100} height={100} alt="logo" unoptimized />
+            item.imgurl === 'n' ? null : <Image className="post-result-image" src={item.imgurl} width={100} height={100} alt="logo" unoptimized />
           }
           <div className="post-result-stat">
             <div id={`star-container${item.postId}`} className="star-container" onClick={() => likePost(item.isStarred, item.postId, item.userId)}>
@@ -165,10 +165,6 @@ export default function Posts({post}) {
             <div id={`bookmark-container${item.postId}`} className="save-container" onClick={() => { bookmarkPost('post', item.postId, item.userId) }}>
               <FaBookmark id={`bookmark${item.postId}`} fill={item.isBookmarked ? '#6614b8' : '#b2b2b2'} />
               <div id={`bookmark-count${item.postId}`}>{item.save}</div>
-            </div>
-            <div className="repost-container">
-              <GrPowerCycle />
-              <div>{item.repostCount}</div>
             </div>
           </div>
         </div>

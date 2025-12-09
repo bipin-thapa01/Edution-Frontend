@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
 import { Ring } from 'ldrs/react';
 import Image from "next/image";
 import './search.css';
@@ -14,10 +14,8 @@ export default function LatestUsers({ data }) {
     <Swiper
       slidesPerView={3}
       spaceBetween={10}
-      pagination={{
-        clickable: true,
-      }}
-      modules={[Pagination]}
+      navigation={true}
+      modules={[Navigation]}
       className="mySwiper"
     >
       {

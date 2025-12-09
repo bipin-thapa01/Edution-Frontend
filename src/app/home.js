@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from 'next/image';
 import PostContainer from "./post/postContainer";
+import TopRightPopup from "./topRightPopup/topRightPopup";
 import { Ring } from 'ldrs/react';
 import { CiImageOn } from "react-icons/ci";
 import { BsEmojiNeutral } from "react-icons/bs";
@@ -13,7 +14,9 @@ export default function Home({ loginCredentials }) {
   const [loginData, setLoginData] = useState(null);
   const [imageList, setImageList] = useState([]);
   const [emojiDisplay, setEmojiDisplay] = useState(false);
-  const [postType, setPostType] =  useState('all');
+  const [postType, setPostType] = useState('all');
+  const [show, setShow] = useState(true);
+  const [popupMessage, setPopupMessage] = useState(null);
 
   useEffect(() => {
     if (loginCredentials) {
@@ -28,31 +31,42 @@ export default function Home({ loginCredentials }) {
   const uploadPost = async () => {
     const postText = document.getElementById('post-text').value;
     if (imageList.length === 0 && postText === '') {
-      alert('Either photo or text is required!');
+      setPopupMessage("Either image or text is required!")
+      setShow(true);
       return;
     }
-    const formData = new FormData();
-    formData.append('file', imageList[0]);
-    formData.append('upload_preset', 'edution_users_upload');
-    const imageRes = await fetch(`https://api.cloudinary.com/v1_1/dlpm6yyad/image/upload`, {
-      method: 'POST',
-      body: formData,
-    })
-    const imageData = await imageRes.json();
 
-    const res = await fetch('http://localhost:8080/api/post', {
-      method: 'POST',
+    let imageData = null;
+
+    if (imageList.length > 0) {
+      const formData = new FormData();
+      formData.append('file', imageList[0]);
+      formData.append('upload_preset', 'edution_users_upload');
+
+      const imageRes = await fetch("https://api.cloudinary.com/v1_1/dlpm6yyad/image/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      imageData = await imageRes.json();
+    }
+
+    const res = await fetch("http://localhost:8080/api/post", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         by: loginData.username,
         description: postText,
-        imgurl: imageData.secure_url,
+        imgurl: imageData?.secure_url || "n",
       })
-    })
+    });
+
     const data = res.text();
     console.log(data);
+    setPopupMessage("Post Uploaded Successfully!")
+    setShow(true);
     setImageList([]);
     document.getElementById('post-text').value = '';
   }
@@ -77,21 +91,29 @@ export default function Home({ loginCredentials }) {
     e.target.value = null;
   };
 
-  const filterPost = (e) =>{
+  const filterPost = (e) => {
     const type = e.currentTarget.textContent;
-    if(type === 'Discover'){
+    if (type === 'Discover') {
       setPostType('all');
-      document.getElementById("home-filter-discovery").style.setProperty("--after-discovery","block");
-      document.getElementById("home-filter-following").style.setProperty("--after-following","none");
+      document.getElementById("home-filter-discovery").style.setProperty("--after-discovery", "block");
+      document.getElementById("home-filter-following").style.setProperty("--after-following", "none");
     }
-    else{
+    else {
       setPostType('following');
-      document.getElementById("home-filter-discovery").style.setProperty("--after-discovery","none");
-      document.getElementById("home-filter-following").style.setProperty("--after-following","block");
+      document.getElementById("home-filter-discovery").style.setProperty("--after-discovery", "none");
+      document.getElementById("home-filter-following").style.setProperty("--after-following", "block");
     }
   }
 
   return <div id="home-container" className="middle-container">
+    {
+        popupMessage ? <TopRightPopup
+        message={popupMessage}
+        duration={10000}
+        show={show}
+        onClose={() => setShow(false)}
+      /> : null
+      }
     <div id="homepage-filter">
       <div id="home-filter-discovery" onClick={filterPost}>Discover</div>
       <div id="home-filter-following" onClick={filterPost}>Following</div>
@@ -122,6 +144,6 @@ export default function Home({ loginCredentials }) {
         zIndex: 1000,
       }}
     />
-    <PostContainer loginData={loginData} postType={postType}/>
+    <PostContainer loginData={loginData} postType={postType} />
   </div>
 }

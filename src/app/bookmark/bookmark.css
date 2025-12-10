@@ -1,20 +1,21 @@
-#bookmark-container{
+#bookmark-container {
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: none;
 }
 
-#bookmark-container::-webkit-scrollbar{
+#bookmark-container::-webkit-scrollbar {
   display: none;
 }
 
-.bookmark-message-container{
+.bookmark-message-container {
   display: flex;
   column-gap: 5px;
+  padding: 0px 10px;
 }
 
-.bookmark-time{
+.bookmark-time {
   color: rgb(72, 72, 72);
   font-size: 15px;
 }
@@ -28,7 +29,7 @@
   border-bottom: 0.5px solid var(--border-color);
 }
 
-.loader{
+.loader {
   margin: 10px 0 0 0;
   width: 100%;
   height: 90px;
@@ -37,52 +38,57 @@
   justify-content: center;
 }
 
-#bookmark-post-container{
+#bookmark-post-container {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
 
-.bookmark-post{
-  border-bottom: 0.5px solid var(--border-color);
-  padding-left: 15px;
+.bookmark-post {
+  border-bottom: 2px solid var(--border-color);
   display: flex;
   flex-direction: column;
   row-gap: 10px;
   padding-bottom: 15px;
 }
 
-.bookmark-message{
+.bookmark-message {
   color: rgb(72, 72, 72);
   font-size: 15px;
 }
 
-.bookmark-head{
+.bookmark-head {
   display: flex;
   align-items: center;
   column-gap: 10px;
+  padding: 0px 10px;
 }
 
-.bookmark-profile{
+.bookmark-profile {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-}
-
-.post-image-container{
-  width: 100%;
-  height: 400px;
   position: relative;
-  border-radius: 10px;
+  overflow: hidden;
 }
 
-.bookmark-post-image{
+.post-image-container {
+  width: 100%;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  overflow: hidden;
+}
+
+.bookmark-post-image {
   object-fit: contain;
   border-radius: 10px;
 }
 
-#bookmark-page-no-post{
+#bookmark-page-no-post {
   width: 100%;
   text-align: center;
   margin-top: 20px;

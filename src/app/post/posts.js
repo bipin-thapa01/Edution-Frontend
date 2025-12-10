@@ -6,7 +6,7 @@ import { Ring } from 'ldrs/react';
 import Image from "next/image";
 import "./postContainer.css"
 
-export default function Posts({post}) {
+export default function Posts({ post }) {
   const router = useRouter();
   const convertTime = (date) => {
     const prev = new Date(date);
@@ -142,13 +142,15 @@ export default function Posts({post}) {
 
   return <div id="post-results">
     {
-      post ? post.length>0 ? post.map((item, index) => {
+      post ? post.length > 0 ? post.map((item, index) => {
         return <div key={index} className="post-result-container">
-          <div className="post-result-container-heading" onClick={()=>router.push(`/user/${item.by}`)}>
-            <Image src={item.profileUrl} width={100} height={100} alt="logo" className="post-owner-pfp" />
+          <div className="post-result-container-heading" onClick={() => router.push(`/user/${item.by}`)}>
+            <div className="post-result-profile-image-container">
+              <Image src={item.profileUrl} fill style={{objectFit: 'cover'}} alt="logo" className="post-owner-pfp" />
+            </div>
             <div className="post-result-container-container-container">
               <div className="post-result-username-container">
-                <div className="post-result-username" onClick={()=>router.push(`/user/${item.by}`)}>@{item.by}</div>
+                <div className="post-result-username" onClick={() => router.push(`/user/${item.by}`)}>@{item.by}</div>
                 <div className="post-result-created-at">.  {convertTime(item.createdAt)}</div>
               </div>
               <div>{item.description}</div>

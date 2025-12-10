@@ -89,3 +89,10 @@
   flex-direction: column;
   row-gap: 10px;
 }
+
+.post-result-profile-image-container{
+  overflow: hidden;
+  height: 50px;
+  width: 50px;
+  position: relative;
+}

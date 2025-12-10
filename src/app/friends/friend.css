@@ -7,10 +7,9 @@
 
 #friend-page-friend-requests-container {
   padding: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 5px;
-  column-gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
 #friend-page-friend-requests-header {
@@ -25,7 +24,6 @@
 }
 
 .friend-page-friend-request {
-  flex: 0 0 33.33%;
   border: 0.5px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -84,7 +82,7 @@
   text-align: center;
 }
 
-.friend-page-friend-request-button-decline:hover{
+.friend-page-friend-request-button-decline:hover {
   background-color: rgb(120, 2, 2);
 }
 
@@ -99,4 +97,16 @@
   width: 100%;
   justify-content: center;
   margin-top: 20px;
+}
+
+@media (max-width: 640px) {
+  #friend-page-friend-requests-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 350px) {
+  #friend-page-friend-requests-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

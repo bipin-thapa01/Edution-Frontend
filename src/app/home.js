@@ -138,7 +138,9 @@ export default function Home({ loginCredentials }) {
     <div id="post-container">
       <div id="post-write-container">
         {
-          loginData ? <Image id="post-user-logo" src={loginData.imgurl} width={100} height={100} alt="logo" /> : <div id="post-loading">
+          loginData ? <div id="homepage-post-upload-imgurl">
+            <Image id="post-user-logo" src={loginData.imgurl} fill style={{objectFit: 'cover'}} alt="logo" />
+          </div> : <div id="post-loading">
             <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
           </div>
         }

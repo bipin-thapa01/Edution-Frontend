@@ -1,10 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthenticateCard from "../authenticateCard";
+import TopRightPopup from "../topRightPopup/topRightPopup";
 import "../global.css";
 
-export default function Login(){
+export default function Login() {
+  const [show, setShow] = useState(true);
+  const [popupMessage, setPopupMessage] = useState(null);
+
   const router = useRouter();
   const signupData = {
     type: "login",
@@ -15,40 +20,50 @@ export default function Login(){
     altLink: "/signup",
   }
 
-  const submitForm = async (e) =>{
+  const submitForm = async (e) => {
     e.preventDefault();
     const temp = e.currentTarget.querySelector('#email').value.trim();
     let email;
     let username;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(emailRegex.test(temp)){
+    if (emailRegex.test(temp)) {
       email = temp;
     }
-    else{
+    else {
       username = temp;
     }
     const password = e.currentTarget.querySelector('#password').value;
-    const res = await fetch('https://myapp-64rs.onrender.com/api/login',{
+    const res = await fetch('https://myapp-64rs.onrender.com/api/login', {
       method: 'POST',
-      headers:{
+      headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({email: email,username: username, password: password})
+      body: JSON.stringify({ email: email, username: username, password: password })
     });
     const data = await res.json();
-    if(data.error){
-      console.log(data.error)
+    if (data.error) {
+      console.log(data.error);
+      setPopupMessage(data.error);
+      setShow(true);
     }
-    else{
+    else {
       localStorage.removeItem('token');
-      localStorage.setItem('token',data.token);
+      localStorage.setItem('token', data.token);
       router.push('/');
     }
   }
 
   return (
     <div>
-      <AuthenticateCard data={signupData} submitForm={submitForm}/>
+      <AuthenticateCard data={signupData} submitForm={submitForm} />
+      {
+        popupMessage ? <TopRightPopup
+          message={popupMessage}
+          duration={10000}
+          show={show}
+          onClose={() => setShow(false)}
+        /> : null
+      }
     </div>
   );
 }

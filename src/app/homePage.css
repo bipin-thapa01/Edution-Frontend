@@ -9,6 +9,14 @@
   display: none;
 }
 
+#homepage-post-upload-imgurl{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: none;
+  position: relative;
+}
+
 #homepage-filter{
   display: flex;
   justify-content: space-evenly;

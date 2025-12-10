@@ -74,7 +74,7 @@ export default function Friend({ fetchData }) {
             return <div className="friend-page-friend-request" key={index} id={`friend-page-friend-request${index}`}>
               <div className="friend-page-friend-request-image">
                 <Image src={item.imgurl} fill
-                  unoptimized style={{ objectFit: 'fit' }} alt="image" />
+                  unoptimized style={{ objectFit: 'cover' }} alt="image" />
               </div>
               <div className="friend-page-friend-request-details">
                 <div>{item.name}</div>

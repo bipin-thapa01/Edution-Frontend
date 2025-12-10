@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Nav from "../nav/nav";
 import Search from "./search";
 import LowerNav from "../lowerNav/lowerNav";
+import Navbar from "../popupNav/Navbar";
 import "./search.css";
 
 export default function SearchPage(){
@@ -33,6 +34,7 @@ export default function SearchPage(){
       <Nav loginCredentials={fetchData}/>
       <Search fetchData={fetchData}/>
       <LowerNav/>
+      <Navbar />
     </div>
   );
 }

@@ -12,6 +12,8 @@ export default function MessagePage() {
   const router = useRouter();
   const [fetchData, setFetchData] = useState(null);
   const lowerNav = useRef();
+  const navBar = useRef();
+  const floatingMenu = useRef();
 
   useEffect(() => {
     let fetchUserData = async () => {
@@ -34,8 +36,8 @@ export default function MessagePage() {
 
   return <div id="messages-page">
     <Nav loginCredentials={fetchData} />
-    <Message fetchData={fetchData} lowerNav={lowerNav}/>
+    <Message fetchData={fetchData} lowerNav={lowerNav} navBar={navBar} floatingMenu={floatingMenu}/>
     <LowerNav lowerNav={lowerNav}/>
-    <Navbar />
+    <Navbar navBar={navBar} floatingMenu={floatingMenu}/>
   </div>
 }

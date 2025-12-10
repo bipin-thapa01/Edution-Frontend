@@ -5,7 +5,7 @@
   z-index: 1001;
   width: 40px;
   height: 40px;
-  background: var(--toggle-btn-color);
+  background: var(--text-color);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -20,14 +20,14 @@
 }
 
 .navToggleBtn:hover {
-  background: var(--text-color);
+  background: rgb(148, 148, 148);
 }
 
 .navToggleBtn span {
   display: block;
   width: 80%;
   height: 3px;
-  background: var(--background-color);
+  background: black;
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
 }
@@ -47,13 +47,14 @@
 .floatingNav {
   position: fixed;
   bottom: 120px; /* Position below the button */
-  right: 0px;
+  right: 10px;
   z-index: 1000;
   background: var(--nav-bg);
-  border-radius: 5px;
+  border-radius: 10px;
+  overflow: hidden;
   box-shadow: 0 8px 16px rgba(78, 78, 78, 0.3);
   width: 200px;
-
+  border: 2px solid var(--border-color);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-20px);
@@ -88,13 +89,7 @@
   background: #34495e;
 }
 
-/* --- Responsiveness for Smaller Screens (Mobile) --- */
-@media (max-width: 600px) {
-  .floatingNav {
-      width: 80%; 
-      right: 10%; /* Centers it on mobile screens */
-  }
-}
+
 
 @media (max-width: 730px) {
   .navToggleBtn{

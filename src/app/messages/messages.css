@@ -224,6 +224,13 @@
   cursor: pointer;
 }
 
+.message-loading-animation{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 @media(max-width:750px){
   #messages-container{
     flex: 0 0 648px;

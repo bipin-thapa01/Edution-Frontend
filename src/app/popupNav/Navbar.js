@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './navbar.module.css';
 
-export default function Navbar() {
+export default function Navbar({navBar, floatingMenu}) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const toggleNav = () => {
@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <>
-      <button 
+      <button ref={navBar}
         className={buttonClass} 
         onClick={toggleNav}
         aria-expanded={isOpen}
@@ -35,7 +35,7 @@ export default function Navbar() {
         <span></span>
       </button>
 
-      <nav id="floating-nav-menu" className={navClass}>
+      <nav ref={floatingMenu} id="floating-nav-menu" className={navClass}>
         <ul>
           <li><a onClick={()=>{
             closeNav();

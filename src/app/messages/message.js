@@ -7,7 +7,7 @@ import "ldrs/react/Ring.css";
 import { FaLocationArrow } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 
-export default function Message({ fetchData, lowerNav }) {
+export default function Message({ fetchData, lowerNav, navBar, floatingMenu }) {
   const router = useRouter();
   const textareaRef = useRef();
   const bottomRef = useRef();
@@ -35,6 +35,12 @@ export default function Message({ fetchData, lowerNav }) {
     if(lowerNav.current){
       lowerNav.current.style.display = 'none';
     }
+    if(navBar.current){
+      navBar.current.style.display = 'none';
+    }
+    if(floatingMenu.current){
+      floatingMenu.current.style.display = 'none';
+    }
     if(leftContainer.current !== undefined && rightContainer.current !== undefined){
       leftContainer.current.style.display = 'none';
       rightContainer.current.style.display = 'flex';
@@ -45,7 +51,7 @@ export default function Message({ fetchData, lowerNav }) {
       .from("message")
       .select("*")
       .or(`and(to.eq.${fetchData?.user?.username},by.eq.${item?.username}),and(to.eq.${item?.username},by.eq.${fetchData?.user?.username})`);
-
+    console.log(data)
     if (error) {
       console.error(error);
       return;
@@ -97,7 +103,6 @@ export default function Message({ fetchData, lowerNav }) {
       if (newMessage !== '') {
         const now = new Date();
         const updatedMessage = {
-          id: message[message.length - 1].id + 1,
           content: newMessage,
           by: fetchData?.user?.username,
           to: currentFriend?.username,
@@ -122,8 +127,16 @@ export default function Message({ fetchData, lowerNav }) {
   };
 
   const goBack = () =>{
-    if(lowerNav.current){
-      lowerNav.current.style.display = 'flex';
+    if(window.innerWidth <= 730){
+      if(lowerNav.current){
+        lowerNav.current.style.display = 'flex';
+      }
+      if(navBar.current){
+        navBar.current.style.display = 'flex';
+      }
+      if(floatingMenu.current){
+        floatingMenu.current.style.display = 'block';
+      }
     }
     if(leftContainer.current !== undefined && rightContainer.current !== undefined){
       leftContainer.current.style.display = 'block';
@@ -193,7 +206,7 @@ export default function Message({ fetchData, lowerNav }) {
                 </div>
               </div>
             </div>
-          }) : <div>
+          }) : <div className="message-loading-animation">
             <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
           </div>
         }
@@ -201,7 +214,7 @@ export default function Message({ fetchData, lowerNav }) {
     </div>
     <div id="message-right-container" ref={rightContainer}>
       {
-        message ? displayMessages(message, currentFriend) : <div>
+        message ? displayMessages(message, currentFriend) : <div className="message-loading-animation">
           <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />
         </div>
       }

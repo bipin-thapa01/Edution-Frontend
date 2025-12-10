@@ -141,3 +141,19 @@
   bottom: 20px;
   border: none;
 }
+
+@media(max-width:750px){
+  #settings-container{
+    flex: 0 0 648px;
+  }
+}
+
+@media (max-width: 730px){
+  #settings-container{
+    flex: 0 0 100vw;
+  }
+
+  #settings-right-container{
+    height: 60vh;
+  }
+}

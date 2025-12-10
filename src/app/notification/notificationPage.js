@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Ring } from 'ldrs/react'
+import Navbar from "../popupNav/Navbar";
 import 'ldrs/react/Ring.css'
 import Nav from "../nav/nav";
 import Notification from "./notification";
@@ -42,6 +42,7 @@ export default function NotificationPage() {
       <Nav loginCredentials={fetchData} />
       <Notification notifications={fetchData}/>
       <LowerNav />
+      <Navbar />
     </div>
   );
 }

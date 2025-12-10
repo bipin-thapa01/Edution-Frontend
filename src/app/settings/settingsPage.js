@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Nav from "../nav/nav";
 import Settings from "./settings";
+import LowerNav from "../lowerNav/lowerNav";
+import Navbar from "../popupNav/Navbar";
 import './settings.css';
 
 export default function SettingsPage(){
@@ -30,5 +32,7 @@ export default function SettingsPage(){
   return <div id="settings-page">
     <Nav loginCredentials={fetchData}/>
     <Settings fetchData={fetchData}/>
+    <LowerNav/>
+    <Navbar/>
   </div>
 }

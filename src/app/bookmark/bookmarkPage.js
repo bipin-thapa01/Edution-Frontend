@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Nav from "../nav/nav";
 import Bookmark from "./bookmark";
 import LowerNav from "../lowerNav/lowerNav";
+import Navbar from "../popupNav/Navbar";
 import "./bookmark.css";
 
 export default function BookmarkPage(){
@@ -41,6 +42,7 @@ export default function BookmarkPage(){
       <Nav loginCredentials={userData}/>
       <Bookmark bookmarkData={bookmarkData?.bookmarkDTOs}/>
       <LowerNav />
+      <Navbar />
     </div>
   );
 }

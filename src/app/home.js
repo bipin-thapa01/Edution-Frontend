@@ -53,7 +53,7 @@ export default function Home({ loginCredentials }) {
       imageData = await imageRes.json();
     }
 
-    const res = await fetch("https://myapp-t7qu.onrender.com/api/post", {
+    const res = await fetch("https://myapp-64rs.onrender.com/api/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -74,7 +74,7 @@ export default function Home({ loginCredentials }) {
 
     document.getElementById('post-button').innerText = 'Submitted✅';
 
-    const res2 = await fetch("https://myapp-t7qu.onrender.com/api/home", {
+    const res2 = await fetch("https://myapp-64rs.onrender.com/api/home", {
       method: "GET",
       headers: {
         authorization: `${localStorage.getItem("token")}`,

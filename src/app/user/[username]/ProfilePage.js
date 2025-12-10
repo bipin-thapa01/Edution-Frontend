@@ -26,7 +26,7 @@ export default function ProfilePage({ profileData }) {
   }
 
   const isFriend = async (username, friendUsername) => {
-    const res = await fetch("https://myapp-t7qu.onrender.com/api/is-friend", {
+    const res = await fetch("https://myapp-64rs.onrender.com/api/is-friend", {
       method: 'GET',
       headers: {
         username: `${username}`,
@@ -72,7 +72,7 @@ export default function ProfilePage({ profileData }) {
   const clickAction = async (e) => {
     const text = e.currentTarget.innerText;
     if (text === 'Unfriend' || text === 'Cancel Request') {
-      const res = await fetch("https://myapp-t7qu.onrender.com/api/unfriend", {
+      const res = await fetch("https://myapp-64rs.onrender.com/api/unfriend", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ export default function ProfilePage({ profileData }) {
       }
     }
     else {
-      const res = await fetch("https://myapp-t7qu.onrender.com/api/send-request", {
+      const res = await fetch("https://myapp-64rs.onrender.com/api/send-request", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

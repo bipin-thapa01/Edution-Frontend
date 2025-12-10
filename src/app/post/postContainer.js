@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import Posts from "./posts";
+import React from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 export default function PostContainer({ loginData, postType }) {
   const [post, setPost] = useState(null);
 
   const getDiscoverPost = async () => {
-    const res = await fetch("https://myapp-t7qu.onrender.com/api/discover", {
+    const res = await fetch("https://myapp-64rs.onrender.com/api/discover", {
       method: 'GET',
       headers: {
         offset: 0,
@@ -20,7 +23,7 @@ export default function PostContainer({ loginData, postType }) {
   }
 
   const getFollowingPost = async () => {
-    const res = await fetch("https://myapp-t7qu.onrender.com/api/following", {
+    const res = await fetch("https://myapp-64rs.onrender.com/api/following", {
       method: 'GET',
       headers: {
         offset: 0,

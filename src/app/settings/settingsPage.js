@@ -14,7 +14,7 @@ export default function SettingsPage(){
 
   useEffect(()=>{
     const fetchData = async () =>{
-      const res = await fetch('https://myapp-t7qu.onrender.com/api/settings',{
+      const res = await fetch('https://myapp-64rs.onrender.com/api/settings',{
         method: 'GET',
         headers: {
           authentication: `${localStorage.getItem("token")}`,

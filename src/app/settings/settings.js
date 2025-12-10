@@ -55,7 +55,7 @@ export default function Settings({ fetchData }) {
       const passwordData = password.current?.value;
       if (selectedIndex === 0 || selectedIndex === 1 || selectedIndex === 3) {
         const updateData = selectedIndex !== 3 ?  textData.current?.value : textAreaData.current?.value;
-        const res = await fetch('https://myapp-t7qu.onrender.com/api/update-text', {
+        const res = await fetch('https://myapp-64rs.onrender.com/api/update-text', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export default function Settings({ fetchData }) {
         })
         const imageData = await imageRes.json();
         const updateData = imageData.secure_url;
-        const res = await fetch('https://myapp-t7qu.onrender.com/api/update-text', {
+        const res = await fetch('https://myapp-64rs.onrender.com/api/update-text', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ export default function NotificationPage() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const res = await fetch("https://myapp-t7qu.onrender.com/api/user-notification", {
+        const res = await fetch("https://myapp-64rs.onrender.com/api/user-notification", {
           method: "GET",
           headers: {
             authorization: `${localStorage.getItem("token")}`,

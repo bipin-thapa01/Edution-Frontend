@@ -26,7 +26,7 @@ export default function Search({ fetchData }) {
       setSearchStatus(<div>Search</div>);
       return;
     }
-    let res = await fetch("https://myapp-t7qu.onrender.com/api/search", {
+    let res = await fetch("https://myapp-64rs.onrender.com/api/search", {
       method: 'GET',
       headers: {
         key: `${key}`,

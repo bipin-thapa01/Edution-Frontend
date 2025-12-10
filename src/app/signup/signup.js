@@ -27,7 +27,7 @@ export default function Signup(){
     const password = e.currentTarget.querySelector('#password').value;
     const roomCode = e.currentTarget.querySelector('#room-code').value;
 
-    const res = await fetch('http://localhost:8080/api/signup',{
+    const res = await fetch('https://myapp-t7qu.onrender.com/api/signup',{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',

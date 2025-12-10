@@ -33,7 +33,7 @@ export default function Posts({post}) {
   }
 
   const likePost = async (isStarred, postId, userId) => {
-    let res = await fetch("http://localhost:8080/api/specific-post", {
+    let res = await fetch("https://myapp-t7qu.onrender.com/api/specific-post", {
       method: "GET",
       headers: {
         postId: `${postId}`,
@@ -50,7 +50,7 @@ export default function Posts({post}) {
         document.getElementById(`star-container${postId}`).style.pointerEvents = 'auto';
       }, 5000);
 
-      let res1 = await fetch("http://localhost:8080/api/unstar", {
+      let res1 = await fetch("https://myapp-t7qu.onrender.com/api/unstar", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ export default function Posts({post}) {
         document.getElementById(`star-container${postId}`).style.pointerEvents = 'auto';
       }, 5000);
 
-      let res2 = await fetch("http://localhost:8080/api/star", {
+      let res2 = await fetch("https://myapp-t7qu.onrender.com/api/star", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ export default function Posts({post}) {
   }
 
   const bookmarkPost = async (bookmarkType, postId, userId) => {
-    let res = await fetch("http://localhost:8080/api/check-bookmark", {
+    let res = await fetch("https://myapp-t7qu.onrender.com/api/check-bookmark", {
       method: 'GET',
       headers: {
         userId: `${userId}`,
@@ -102,7 +102,7 @@ export default function Posts({post}) {
       setTimeout(() => {
         document.getElementById(`bookmark-container${postId}`).style.pointerEvents = 'auto';
       }, 5000);
-      let res1 = await fetch("http://localhost:8080/api/bookmark", {
+      let res1 = await fetch("https://myapp-t7qu.onrender.com/api/bookmark", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ export default function Posts({post}) {
       setTimeout(() => {
         document.getElementById(`bookmark-container${postId}`).style.pointerEvents = 'auto';
       }, 5000);
-      let res2 = await fetch("http://localhost:8080/api/bookmark", {
+      let res2 = await fetch("https://myapp-t7qu.onrender.com/api/bookmark", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

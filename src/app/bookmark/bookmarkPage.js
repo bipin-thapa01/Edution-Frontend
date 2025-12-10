@@ -16,7 +16,7 @@ export default function BookmarkPage(){
 
   useEffect(()=>{
     const fetchBookmark = async () =>{
-      const res = await fetch("http://localhost:8080/api/get-bookmarks", {
+      const res = await fetch("https://myapp-t7qu.onrender.com/api/get-bookmarks", {
         method: 'GET',
         headers:{
           token: `${localStorage.getItem("token")}`,

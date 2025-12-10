@@ -14,7 +14,7 @@ export default function FriendsPage() {
 
   useEffect(() => {
     const fetchFriendsData = async () => {
-      const res = await fetch('http://localhost:8080/api/fetch-friend-page', {
+      const res = await fetch('https://myapp-t7qu.onrender.com/api/fetch-friend-page', {
         method: 'GET',
         headers: {
           authorization: `${localStorage.getItem('token')}`

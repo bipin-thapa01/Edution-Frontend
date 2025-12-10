@@ -17,7 +17,7 @@ export default function MessagePage() {
 
   useEffect(() => {
     let fetchUserData = async () => {
-      const res = await fetch("http://localhost:8080/api/message-fetch", {
+      const res = await fetch("https://myapp-t7qu.onrender.com/api/message-fetch", {
         method: 'GET',
         headers: {
           authentication: `${localStorage.getItem('token')}`

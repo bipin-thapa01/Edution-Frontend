@@ -14,7 +14,7 @@ export default function Friend({ fetchData }) {
 
   const modifyRequest = async (type,index) =>{
     if(type === 'accepted'){
-      const res = await fetch('http://localhost:8080/api/update-request',{
+      const res = await fetch('https://myapp-t7qu.onrender.com/api/update-request',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export default function Friend({ fetchData }) {
       }
     }
     else{
-      const res = await fetch('http://localhost:8080/api/unfriend',{
+      const res = await fetch('https://myapp-t7qu.onrender.com/api/unfriend',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

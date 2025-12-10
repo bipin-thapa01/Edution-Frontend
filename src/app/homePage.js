@@ -14,7 +14,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchHomepage = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/home", {
+        const res = await fetch("https://myapp-t7qu.onrender.com/api/home", {
           method: "GET",
           headers: {
             authorization: `${localStorage.getItem("token")}`,

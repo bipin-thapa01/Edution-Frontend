@@ -12,7 +12,7 @@ export default function SearchPage(){
   const [fetchData, setFetchData] = useState(null);
   useEffect(()=>{
     const validatePage = async () =>{
-      const res = await fetch('http://localhost:8080/api/search-validate',{
+      const res = await fetch('https://myapp-t7qu.onrender.com/api/search-validate',{
         method: 'GET',
         headers: {
           authorization: `${localStorage.getItem('token')}`

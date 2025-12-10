@@ -16,7 +16,7 @@ export default function Profile({ username }) {
 
   useEffect(() => {
     let fetchUserData = async () => {
-      const res = await fetch("http://localhost:8080/api/user-profile", {
+      const res = await fetch("https://myapp-t7qu.onrender.com/api/user-profile", {
         method: 'GET',
         headers: {
           offset: `${offset}`,

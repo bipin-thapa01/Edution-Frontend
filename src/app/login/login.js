@@ -28,7 +28,7 @@ export default function Login(){
       username = temp;
     }
     const password = e.currentTarget.querySelector('#password').value;
-    const res = await fetch('http://localhost:8080/api/login',{
+    const res = await fetch('https://myapp-t7qu.onrender.com/api/login',{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',

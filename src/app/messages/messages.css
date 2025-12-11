@@ -70,6 +70,10 @@
   border-bottom: 2px solid var(--border-color);
 }
 
+.message-left-container-option:hover, .message-left-container-option:hover *{
+  background-color: rgb(41, 41, 41);
+}
+
 .message-left-container-option-selected,
 .message-left-container-option-selected * {
   background-color: var(--border-color);
@@ -81,6 +85,17 @@
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
+}
+
+.message-left-container-option-details-container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.message-left-container-option-last-message{
+  color: gray;
+  font-size: 14px;
 }
 
 .message-left-container-option-details {

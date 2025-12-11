@@ -99,6 +99,16 @@
   margin-top: 20px;
 }
 
+#friend-page-friend-requests-container:has(> :only-child) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#friend-page-friend-requests-container:has(> :only-child) .friend-page-friend-request{
+  width: 300px;
+}
+
 @media (max-width: 640px) {
   #friend-page-friend-requests-container {
     grid-template-columns: repeat(2, 1fr);

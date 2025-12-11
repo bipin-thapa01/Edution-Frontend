@@ -27,13 +27,19 @@ export default function Friend({ fetchData }) {
       });
       const data = await res.json();
       if(data.response === 'success' && acceptButton.current !== undefined){
-        acceptButton.current.innerText = 'Accepted✅';
-        acceptButton.current.style.backgroundColor = '#131314';
+        document.getElementById(`friend-page-friend-request-button-accept${index}`).innerText = 'Accepted✅';
+        document.getElementById(`friend-page-friend-request-button-accept${index}`).style.backgroundColor = '#131314';
         setTimeout(()=>{
           setRequestData(prev => ({
             ...prev,
             friends: prev.friends.filter((_, i) => i !== index)
           }));
+          if(document.getElementById(`friend-page-friend-request-button-accept${index}`)){
+            document.getElementById(`friend-page-friend-request-button-accept${index}`).innerText = 'Accept Request';
+          }
+          if(document.getElementById(`friend-page-friend-request-button-accept${index}`)){
+            document.getElementById(`friend-page-friend-request-button-accept${index}`).style.backgroundColor = '#6614b8';
+          }
         },2000)
       }
     }
@@ -51,13 +57,19 @@ export default function Friend({ fetchData }) {
       });
       const data = await res.json();
       if(data.response === 'success' && declineButton.current !== undefined){
-        declineButton.current.innerText = 'Declined❌';
-        declineButton.current.style.backgroundColor = '#131314';
+        document.getElementById(`friend-page-friend-request-button-decline${index}`).innerText = 'Declined❌';
+        document.getElementById(`friend-page-friend-request-button-decline${index}`).style.backgroundColor = '#131314';
         setTimeout(()=>{
           setRequestData(prev => ({
             ...prev,
             friends: prev.friends.filter((_, i) => i !== index)
           }));
+          if(document.getElementById(`friend-page-friend-request-button-decline${index}`)){
+            document.getElementById(`friend-page-friend-request-button-decline${index}`).innerText = 'Decline Request';
+          }
+          if(document.getElementById(`friend-page-friend-request-button-decline${index}`)){
+            document.getElementById(`friend-page-friend-request-button-decline${index}`).style.backgroundColor = '#a20303';
+          }
         },2000)
       }
     }
@@ -81,8 +93,8 @@ export default function Friend({ fetchData }) {
                 <div>@{item.username}</div>
               </div>
               <div className="friend-page-friend-request-buttons">
-                <div ref={acceptButton} onClick={()=>modifyRequest("accepted",index)} className="friend-page-friend-request-button-accept">Accept Request</div>
-                <div ref={declineButton} onClick={()=>modifyRequest("declined",index)} className="friend-page-friend-request-button-decline">Decline Request</div>
+                <div ref={acceptButton} onClick={()=>modifyRequest("accepted",index)} className="friend-page-friend-request-button-accept" id={`friend-page-friend-request-button-accept${index}`}>Accept Request</div>
+                <div ref={declineButton} onClick={()=>modifyRequest("declined",index)} className="friend-page-friend-request-button-decline" id={`friend-page-friend-request-button-decline${index}`}>Decline Request</div>
               </div>
             </div>
           }) : <div id="friend-page-no-friend">No Friend Requests Available</div> : <div className="friend-page-loader">

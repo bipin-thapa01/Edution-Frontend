@@ -16,6 +16,7 @@ export default function Message({ fetchData, lowerNav, navBar, floatingMenu }) {
   const latestMessageRef = useRef(null);
   const [friends, setFriends] = useState(null);
   const [message, setMessage] = useState(null);
+  const [lastMessage, setLastMessage] = useState(null);
   const [currentFriend, setCurrentFriend] = useState(null);
   const intervalIds = useRef([]);
 
@@ -23,6 +24,7 @@ export default function Message({ fetchData, lowerNav, navBar, floatingMenu }) {
   useEffect(() => {
     if (fetchData) {
       setFriends(fetchData?.friends);
+      setLastMessage(fetchData?.lastMessage);
     }
   }, [fetchData]);
 
@@ -154,7 +156,7 @@ export default function Message({ fetchData, lowerNav, navBar, floatingMenu }) {
       <div id="message-right-container-body">
         <div onClick={() => router.push(`/user/${currentFriend.username}`)} id="message-right-container-description">
           <div id="message-right-container-description-image">
-            <Image alt="image" src={currentFriend.imgurl} fill style={{ objectFit: 'fit' }} />
+            <Image alt="image" src={currentFriend.imgurl} fill style={{ objectFit: 'cover' }} />
           </div>
           <div id="message-right-container-description-description">
             <div>{currentFriend.name}</div>
@@ -195,14 +197,17 @@ export default function Message({ fetchData, lowerNav, navBar, floatingMenu }) {
           friends ? friends.map((item, index) => {
             return <div className="message-left-container-option" key={index} onClick={(e) => displayRightContainer(item, index, e)}>
               <div className="message-left-container-option-image">
-                <Image alt="image" src={item.imgurl} fill unoptimized style={{ objectFit: 'fit' }} />
+                <Image alt="image" src={item.imgurl} fill unoptimized style={{ objectFit: 'cover' }} />
               </div>
-              <div>
+              <div className="message-left-container-option-details-container">
                 <div className="message-left-container-option-details">
                   <div>{item.name} . </div>
                   <div className="message-left-container-option-username"> @{item.username}</div>
                 </div>
-                <div>
+                <div className="message-left-container-option-last-message">
+                  {
+                    lastMessage ? lastMessage[index] : null
+                  }
                 </div>
               </div>
             </div>

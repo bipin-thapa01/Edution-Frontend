@@ -18,7 +18,7 @@ export default function AuthenticateCard({ data, submitForm }) {
   return (
     <div>
       <div id="auth-nav">
-        <div id="auth-nav-logo">EDUTION</div>
+        <div id="auth-nav-logo">SOCIALZ</div>
         <div id="auth-nav-func">
           <div onClick={() => { router.push(data.altLink) }}>
             {data.alt}
@@ -29,14 +29,14 @@ export default function AuthenticateCard({ data, submitForm }) {
 
       <div id="auth-card">
         <div id="auth-purple-card" className="auth-card-child">
-          <div id="auth-purple-card-title">Join EDUTION</div>
+          <div id="auth-purple-card-title">Join SOCIALZ</div>
           <div id="auth-purple-card-desc">Learn, Connect, and Grow - All in One Place</div>
           <div id="auth-purple-card-info">
             <div className="auth-purple-card-info-inner">
               <div className="auth-purple-card-info-inner-icon-container"><FaLaptop className="auth-purple-card-info-inner-icon" /></div>
               <div className="auth-purple-card-info-inner-text-container">
                 <div className="auth-purple-card-info-inner-text-title">Community</div>
-                <div className="auth-purple-card-info-inner-text-desc">Expose yourself to EDUCTION community.</div>
+                <div className="auth-purple-card-info-inner-text-desc">Expose yourself to SOCIALZ community.</div>
               </div>
             </div>
             <div className="auth-purple-card-info-inner">
@@ -56,7 +56,7 @@ export default function AuthenticateCard({ data, submitForm }) {
           </div>
         </div>
         <div id="auth-white-card" className="auth-card-child">
-          <div id="auth-white-card-logo">EDUTION</div>
+          <div id="auth-white-card-logo">SOCIALZ</div>
           <div className="center">{data.ask}</div>
           <div id="jlmp" className="center">Join Like Minded Pairs</div>
           <form id="auth-form" onSubmit={submitForm}>

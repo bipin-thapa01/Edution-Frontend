@@ -1,8 +1,8 @@
 import "./global.css";
 
 export const metadata = {
-  title: 'EDUTION - Home',
-  description: 'Homepage of EDUTION. Nepals one and only social media site with the feature of learning integrated.',
+  title: 'SOCIALZ - Home',
+  description: 'Homepage of SOCIALZ. Nepals one and only social media site with the feature of learning integrated.',
 }
 
 export default function RootLayout({ children }) {

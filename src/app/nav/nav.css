@@ -120,6 +120,11 @@
 }
 
 @media (max-width: 1240px){
+
+  #nav-logo{
+    font-size: 14px;
+  }
+
   #nav{
     flex: 0 0 70px;
     display: flex;

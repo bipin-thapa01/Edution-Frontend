@@ -128,11 +128,11 @@
 }
 
 #user-profile-tab-content{
-  display: flex;
   padding: 5px;
-  flex-wrap: wrap;
-  row-gap: 5px;
-  column-gap: 5px;
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  justify-content: center;
 }
 
 .profile-friends-container{
@@ -147,6 +147,33 @@
   padding: 5px;
   row-gap: 10px;
   cursor: pointer;
+}
+
+.profile-friends-container:hover, .profile-friends-container:hover *{
+  background-color: rgb(39, 39, 39);
+}
+
+@media (min-width: 1024px) {
+  #user-profile-tab-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  #user-profile-tab-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  #user-profile-tab-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+#user-profile-tab-content:has(.profile-friends-container:only-child) {
+  grid-template-columns: 300px;
+  justify-content: center;
 }
 
 #profile-friends-profile{

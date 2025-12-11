@@ -12,6 +12,8 @@ export default function Search({ fetchData }) {
   const [data, setData] = useState(null);
   const [searchType, setSearchType] = useState('user');
   const [searchContent, setSearchContent] = useState(null);
+  const debounceTimerRef = useRef(null);
+  const abortControllerRef = useRef(null);
 
   useEffect(() => {
     if (!fetchData) return;
@@ -19,22 +21,47 @@ export default function Search({ fetchData }) {
   }, [fetchData]);
 
   const searchKey = async (e) => {
-    setSearchStatus(<Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />);
-    let key = e.currentTarget.value;
+    let key = e.currentTarget.value.trim();
+    
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
     if (key.length === 0) {
       setSearchContent(null);
       setSearchStatus(<div>Search</div>);
       return;
     }
-    let res = await fetch("https://myapp-64rs.onrender.com/api/search", {
-      method: 'GET',
-      headers: {
-        key: `${key}`,
-        username: `${fetchData.userDTO.username}`,
+
+    setSearchStatus(<Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />);
+
+    debounceTimerRef.current = setTimeout(async () => {
+      try {
+        abortControllerRef.current = new AbortController();
+
+        let res = await fetch("https://myapp-64rs.onrender.com/api/search", {
+          method: 'GET',
+          headers: {
+            key: `${key}`,
+            username: `${fetchData.userDTO.username}`,
+          },
+          signal: abortControllerRef.current.signal
+        });
+
+        let data = await res.json();
+        setSearchContent(data);
+        setSearchStatus(<div>Search</div>);
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          console.error('Search error:', error);
+          setSearchStatus(<div>Search</div>);
+        }
       }
-    });
-    let data = await res.json();
-    setSearchContent(data);
+    }, 300);
   }
 
   const changeSearchResultType = (e) => {
@@ -50,6 +77,17 @@ export default function Search({ fetchData }) {
       setSearchType('post');
     }
   }
+
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
 
   return (
     <div className="middle-container">

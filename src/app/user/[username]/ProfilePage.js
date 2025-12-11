@@ -12,6 +12,7 @@ export default function ProfilePage({ profileData }) {
   const [friendData, setFriendData] = useState(null);
   const [checkFriend, setCheckFriend] = useState(null);
   const [tabContent, setTabContent] = useState(<div>Loading...</div>);
+  const [activeTab, setActiveTab] = useState('posts');
   const friendButton = useRef();
   const postTab = useRef();
   const friendTab = useRef();
@@ -112,15 +113,6 @@ export default function ProfilePage({ profileData }) {
     }
   }
 
-  useEffect(() => {
-    if (profileData?.friendDTO && profileData?.userDTO) {
-      setFriendData(profileData.friendDTO);
-      isFriend(profileData.userDTO.username, profileData.friendDTO.username);
-      setTabContent(<Posts post={profileData.postDTOs} />);
-    }
-    console.log(profileData);
-  }, [profileData]);
-
   const displayFriendList = (friendDTOs) => {
     if (friendDTOs && friendDTOs.length > 0) {
       return friendDTOs.map((item, index) => (
@@ -145,16 +137,34 @@ export default function ProfilePage({ profileData }) {
     }
   };
 
+  useEffect(() => {
+    if (!profileData) return;
+
+    if (activeTab === 'posts') {
+      setTabContent(<Posts post={profileData.postDTOs} />);
+    } else if (activeTab === 'friends') {
+      setTabContent(displayFriendList(profileData.friendDTOs));
+    }
+  }, [activeTab, profileData]);
+
+  useEffect(() => {
+    if (profileData?.friendDTO && profileData?.userDTO) {
+      setFriendData(profileData.friendDTO);
+      isFriend(profileData.userDTO.username, profileData.friendDTO.username);
+      setActiveTab('posts');
+    }
+    console.log(profileData);
+  }, [profileData]);
 
   const updateTabData = (e) => {
     if (postTab.current !== undefined && friendTab.current !== undefined) {
       if (e.currentTarget.innerText === 'Posts') {
-        setTabContent(<Posts post={profileData.postDTOs} />);
+        setActiveTab('posts');
         postTab.current.style.setProperty('--tab-header1', 'block');
         friendTab.current.style.setProperty('--tab-header2', 'none');
       }
       else {
-        setTabContent(displayFriendList(profileData.friendDTOs));
+        setActiveTab('friends');
         postTab.current.style.setProperty('--tab-header1', 'none');
         friendTab.current.style.setProperty('--tab-header2', 'block');
       }

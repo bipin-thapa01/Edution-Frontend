@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import Image from 'next/image';
 import PostContainer from "./post/postContainer";
@@ -17,12 +18,29 @@ export default function Home({ loginCredentials }) {
   const [postType, setPostType] = useState('all');
   const [show, setShow] = useState(true);
   const [popupMessage, setPopupMessage] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (loginCredentials) {
       setLoginData(loginCredentials.user);
     }
   }, [loginCredentials]);
+
+  // Update UI styles when postType changes
+  useEffect(() => {
+    const discoveryEl = document.getElementById("home-filter-discovery");
+    const followingEl = document.getElementById("home-filter-following");
+    
+    if (discoveryEl && followingEl) {
+      if (postType === 'all') {
+        discoveryEl.style.setProperty("--after-discovery", "block");
+        followingEl.style.setProperty("--after-following", "none");
+      } else {
+        discoveryEl.style.setProperty("--after-discovery", "none");
+        followingEl.style.setProperty("--after-following", "block");
+      }
+    }
+  }, [postType]);
 
   const clickInputImage = () => {
     document.getElementById('post-input-file').click();
@@ -85,16 +103,11 @@ export default function Home({ loginCredentials }) {
 
     setTimeout(() => {
       document.getElementById('post-button').innerText = 'Post';
-    }, [2000]);
+    }, 2000);
   }
 
   const displayEmoji = () => {
-    if (emojiDisplay === true) {
-      setEmojiDisplay(false);
-    }
-    else {
-      setEmojiDisplay(true);
-    }
+    setEmojiDisplay(!emojiDisplay);
   }
 
   const onEmojiClick = (emoji) => {
@@ -112,13 +125,8 @@ export default function Home({ loginCredentials }) {
     const type = e.currentTarget.textContent;
     if (type === 'Discover') {
       setPostType('all');
-      document.getElementById("home-filter-discovery").style.setProperty("--after-discovery", "block");
-      document.getElementById("home-filter-following").style.setProperty("--after-following", "none");
-    }
-    else {
+    } else {
       setPostType('following');
-      document.getElementById("home-filter-discovery").style.setProperty("--after-discovery", "none");
-      document.getElementById("home-filter-following").style.setProperty("--after-following", "block");
     }
   }
 
@@ -138,7 +146,7 @@ export default function Home({ loginCredentials }) {
     <div id="post-container">
       <div id="post-write-container">
         {
-          loginData ? <div id="homepage-post-upload-imgurl">
+          loginData ? <div onClick={()=>router.push(`/user/${loginData?.username}`)} id="homepage-post-upload-imgurl">
             <Image id="post-user-logo" src={loginData.imgurl} fill style={{objectFit: 'cover'}} alt="logo" />
           </div> : <div id="post-loading">
             <Ring color="#6614b8" size={30} speed={2} bgOpacity={0.2} />

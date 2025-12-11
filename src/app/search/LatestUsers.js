@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { Ring } from 'ldrs/react';
 import Image from "next/image";
 import './search.css';
@@ -12,11 +12,22 @@ export default function LatestUsers({ data }) {
 
   return <div id='swiper-container-wrapper'>
     <Swiper
-      slidesPerView={3}
+      slidesPerView={1}
       spaceBetween={10}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
       navigation={true}
-      modules={[Navigation]}
-      className="mySwiper"
+      modules={[Autoplay, Navigation]}
+      breakpoints={{
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        }
+      }}
     >
       {
         data ?

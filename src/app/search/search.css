@@ -149,7 +149,6 @@
   border: 0.5px solid var(--border-color);
   border-radius: 10px;
   overflow: hidden;
-  flex: 0 0 32.2%;
   height: 180px;
   display: flex;
   flex-direction: column;
@@ -194,4 +193,51 @@
 
 .search-result-post-username{
   color: gray;
+}
+
+#search-results{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px 5px;
+  width: 100%;
+}
+
+.search-result-user{
+  border: 0.5px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  row-gap: 10px;
+  cursor: pointer;
+}
+
+.search-result-user:hover, .search-result-user:hover *{
+  background-color: rgb(30, 30, 30);
+}
+
+#search-results:has(> :only-child) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search-results:has(> :only-child) .search-result-user{
+  width: 300px;
+}
+
+@media (max-width: 768px) {
+  #search-results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  #search-results {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

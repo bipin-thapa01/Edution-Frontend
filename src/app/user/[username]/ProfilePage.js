@@ -182,7 +182,7 @@ export default function ProfilePage({ profileData }) {
           </div>
           <div id="user-profile-details">
             {
-              profileData.isFriend && profileData.username !== 'admin' ?
+              profileData.isFriend && friendData.username !== 'admin' ?
                 <div id="profile-request-button" ref={friendButton} onMouseEnter={mouseEnterAction} onMouseLeave={mouseLeaveAction} onClick={clickAction}>{checkFriend ? checkFriend : "Loading..."}</div>
                 : null
             }

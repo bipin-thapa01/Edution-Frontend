@@ -140,6 +140,11 @@
   right: 20px;
   bottom: 20px;
   border: none;
+  cursor: pointer;
+}
+
+#settings-page-server-update-button:hover{
+  background-color: #5d13a7;
 }
 
 @media(max-width:750px){

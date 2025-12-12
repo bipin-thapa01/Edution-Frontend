@@ -13,7 +13,7 @@ export default function Login() {
   const router = useRouter();
   const signupData = {
     type: "login",
-    alt: "SinUp",
+    alt: "SignUp",
     ask: "Welcome back!",
     buttonText: "Login into your account",
     altOption: "or Signup",

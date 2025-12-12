@@ -153,7 +153,9 @@ export default function Posts({ post }) {
                 <div className="post-result-username" onClick={() => router.push(`/user/${item.by}`)}>@{item.by}</div>
                 <div className="post-result-created-at">.  {convertTime(item.createdAt)}</div>
               </div>
-              <div>{item.description}</div>
+              {
+                item.description ? <div>{item.description}</div> : null
+              }
             </div>
           </div>
           {
